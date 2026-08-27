@@ -53,3 +53,15 @@ export const HOME_PAGE_QUERY = defineQuery(`
     }
   }
 `);
+
+export const FOOTER_QUERY = defineQuery(`
+  *[_type == "footer" && _id == "footer"][0]{
+    slogan,
+    contactItems[]{
+      _key,
+      icon,
+      text,
+      href
+    }
+  }
+`);

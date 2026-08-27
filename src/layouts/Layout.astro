@@ -1,6 +1,9 @@
 ---
 import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer/Footer.astro';
 import { asset } from '../lib/assets';
+import { FOOTER_QUERY } from '../lib/queries';
+import { sanityClient } from 'sanity:client';
 import '../styles/global.css';
 
 interface Props {
@@ -9,6 +12,8 @@ interface Props {
 }
 
 const { title = 'Paprika', description } = Astro.props;
+
+const footer = await sanityClient.fetch(FOOTER_QUERY);
 ---
 
 <!doctype html>
@@ -32,6 +37,7 @@ const { title = 'Paprika', description } = Astro.props;
   <body class="bg-light-gray font-sans text-dark-gray antialiased">
     <Navigation />
     <slot />
+    <Footer slogan={footer?.slogan} contactItems={footer?.contactItems} />
     <script>
       import '../scripts/smoothScroll.ts';
     </script>
