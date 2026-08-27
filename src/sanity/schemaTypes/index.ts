@@ -6,6 +6,7 @@ import { homePage } from './pages/homePage';
 import { page } from './pages/page';
 import { ecoSection } from './sections/ecoSection';
 import { heroSection } from './sections/heroSection';
+import { quoteSection } from './sections/quoteSection';
 import { servicesSection } from './sections/servicesSection';
 
 export const schemaTypes = [
@@ -13,5 +14,6 @@ export const schemaTypes = [
   page,
   ecoSection,
   heroSection,
+  quoteSection,
   servicesSection,
 ];

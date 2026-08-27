@@ -32,5 +32,8 @@ const { title = 'Paprika', description } = Astro.props;
   <body class="bg-light-gray font-sans text-dark-gray antialiased">
     <Navigation />
     <slot />
+    <script>
+      import '../scripts/smoothScroll.ts';
+    </script>
   </body>
 </html>

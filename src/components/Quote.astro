@@ -1,0 +1,269 @@
+---
+import { asset } from '../lib/assets';
+
+interface ContactItem {
+  _key?: string;
+  icon?: string | null;
+  text?: string | null;
+  href?: string | null;
+}
+
+interface ContactInfo {
+  title?: string | null;
+  companyName?: string | null;
+  items?: ContactItem[] | null;
+}
+
+interface Props {
+  headline?: string | null;
+  body?: string | null;
+  contactInfo?: ContactInfo | null;
+}
+
+const ICON_COLORS = ['text-blue', 'text-red', 'text-green'] as const;
+
+const DEFAULT_CONTACT_ITEMS: ContactItem[] = [
+  {
+    _key: 'address',
+    icon: 'ph ph-map-pin',
+    text: 'Hungary, 1103 Budapest, Gyömrői út 150.',
+    href: 'https://maps.app.goo.gl/6jy2A5eTwPxXWqVD9',
+  },
+  {
+    _key: 'phone',
+    icon: 'ph ph-phone',
+    text: '+36 70 341 8874',
+    href: 'tel:+36703418874',
+  },
+  {
+    _key: 'email',
+    icon: 'ph ph-envelope',
+    text: 'info@paprika-advertising.com',
+    href: 'mailto:info@paprika-advertising.com',
+  },
+];
+
+const {
+  headline = 'Request a Quote',
+  body = 'Please feel free to get in touch anytime, we will reply shortly.',
+  contactInfo,
+} = Astro.props;
+
+const title = headline || 'Request a Quote';
+const description =
+  body || 'Please feel free to get in touch anytime, we will reply shortly.';
+const contactTitle = contactInfo?.title || 'Contact Info';
+const companyName = contactInfo?.companyName || 'Paprika Advertising Kft.';
+const contactItems = contactInfo?.items?.length
+  ? contactInfo.items
+  : DEFAULT_CONTACT_ITEMS;
+const dividerSrc = asset('/global/custom-divider.svg');
+---
+
+<section id="quote" class="bg-white" aria-label="Request a Quote">
+  <div class="mx-auto max-w-container px-[6vw] py-24 max-md:py-16">
+    <div class="mx-auto flex max-w-3xl flex-col items-center gap-2 text-center">
+      <img
+        src={dividerSrc}
+        alt=""
+        width="88"
+        height="4"
+        class="h-1 w-[88px]"
+        loading="lazy"
+        decoding="async"
+      />
+      <h2
+        class="font-heading text-[56px] font-medium tracking-tight text-dark-gray max-md:text-4xl"
+      >
+        {title}
+      </h2>
+      <p class="text-base leading-relaxed text-mid-gray-2 max-md:text-[0.95rem]">
+        {description}
+      </p>
+    </div>
+
+    <div
+      class="mt-14 grid grid-cols-12 items-start gap-6 max-lg:grid-cols-1 max-md:mt-10"
+    >
+      <div
+        class="col-span-6 rounded-[0.7rem] bg-blue p-6 text-white max-lg:col-span-full"
+        data-quote-form
+      >
+        <form
+          data-quote-form-fields
+          action="https://formsubmit.co/ajax/madacsi.peter.98@gmail.com"
+          method="POST"
+          class="flex flex-col gap-5"
+        >
+          <input type="hidden" name="_subject" value="Paprika quote request" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+
+          <div class="flex flex-col gap-2">
+            <label for="quote-name" class="text-sm font-medium">Name*</label>
+            <input
+              id="quote-name"
+              name="name"
+              type="text"
+              required
+              maxlength="256"
+              placeholder="e.g. John Doe"
+              class="w-full rounded-[0.7rem] border border-white/25 bg-blue/40 px-4 py-3 text-base text-white placeholder:text-white/50 outline-none transition-colors focus:border-white/60"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="quote-email" class="text-sm font-medium">Email*</label>
+            <input
+              id="quote-email"
+              name="email"
+              type="email"
+              required
+              maxlength="256"
+              placeholder="e.g. jdoe@email.com"
+              class="w-full rounded-[0.7rem] border border-white/25 bg-blue/40 px-4 py-3 text-base text-white placeholder:text-white/50 outline-none transition-colors focus:border-white/60"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="quote-subject" class="text-sm font-medium">Subject*</label>
+            <input
+              id="quote-subject"
+              name="subject"
+              type="text"
+              required
+              maxlength="256"
+              placeholder="e.g. Getting a quote"
+              class="w-full rounded-[0.7rem] border border-white/25 bg-blue/40 px-4 py-3 text-base text-white placeholder:text-white/50 outline-none transition-colors focus:border-white/60"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="quote-message" class="text-sm font-medium">Message</label>
+            <textarea
+              id="quote-message"
+              name="message"
+              rows="5"
+              maxlength="5000"
+              placeholder="Leave us a message..."
+              class="w-full resize-y rounded-[0.7rem] border border-white/25 bg-blue/40 px-4 py-3 text-base text-white placeholder:text-white/50 outline-none transition-colors focus:border-white/60"
+            ></textarea>
+          </div>
+
+          <label class="flex items-start gap-3 text-sm leading-relaxed">
+            <input
+              type="checkbox"
+              name="consent"
+              value="yes"
+              required
+              class="mt-1 size-4 shrink-0 accent-white"
+            />
+            <span>
+              I have read and agree to the{' '}
+              <a href="/privacy-policy" class="underline underline-offset-2"
+                >Privacy Policy</a
+              >, and I consent to the storage and processing of my personal data.*
+            </span>
+          </label>
+
+          <p
+            data-quote-form-error
+            hidden
+            class="text-sm text-white"
+            role="alert"
+          >
+            Oops! Something went wrong while submitting the form.
+          </p>
+
+          <div class="mt-2 flex items-end justify-between gap-4 max-sm:flex-col max-sm:items-stretch">
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center rounded-[0.7rem] bg-white px-[1em] py-[0.7em] text-base text-dark-gray transition-colors duration-300 hover:bg-light-gray disabled:cursor-not-allowed disabled:opacity-70 max-sm:w-full"
+            >
+              Submit
+            </button>
+            <p class="text-sm text-white/70 max-sm:text-right">*Required</p>
+          </div>
+        </form>
+
+        <div
+          data-quote-form-success
+          hidden
+          tabindex="-1"
+          role="status"
+          aria-live="polite"
+          class="flex min-h-[320px] items-center justify-center"
+        >
+          <p
+            class="text-center font-heading text-[32px] font-medium leading-tight tracking-tight"
+          >
+            Thank you for your submission!
+          </p>
+        </div>
+      </div>
+
+      <aside
+        class="col-span-6 rounded-[0.7rem] border border-mid-gray-1 bg-white p-8 max-lg:col-span-full max-md:p-6"
+        aria-label="Contact Info"
+      >
+        <h3 class="font-heading text-[24px] font-medium tracking-tight text-dark-gray">
+          {contactTitle}
+        </h3>
+        <p class="mt-6 font-medium text-dark-gray">{companyName}</p>
+        <ul class="mt-5 flex flex-col gap-2" role="list">
+          {
+            contactItems.map((item, index) => {
+              const colorClass = ICON_COLORS[index % ICON_COLORS.length];
+              const itemClass =
+                'flex items-start gap-3 text-sm leading-relaxed text-dark-gray';
+              const isExternal = Boolean(item.href?.startsWith('http'));
+
+              return (
+                <li>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      class:list={[itemClass, 'transition-colors duration-300 hover:text-blue']}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noopener noreferrer' : undefined}
+                    >
+                      {item.icon && (
+                        <i
+                          class:list={[
+                            item.icon,
+                            colorClass,
+                            'inline-flex size-6 shrink-0 items-center justify-center text-[24px] leading-none',
+                          ]}
+                          aria-hidden="true"
+                        />
+                      )}
+                      <span class="underline underline-offset-2">{item.text}</span>
+                    </a>
+                  ) : (
+                    <div class={itemClass}>
+                      {item.icon && (
+                        <i
+                          class:list={[
+                            item.icon,
+                            colorClass,
+                            'inline-flex size-6 shrink-0 items-center justify-center text-[24px] leading-none',
+                          ]}
+                          aria-hidden="true"
+                        />
+                      )}
+                      <span class="underline underline-offset-2">{item.text}</span>
+                    </div>
+                  )}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/quoteForm.ts';
+</script>

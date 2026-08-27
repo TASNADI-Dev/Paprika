@@ -32,6 +32,20 @@ export const HOME_PAGE_QUERY = defineQuery(`
           ...,
           alt
         }
+      },
+      _type == "quoteSection" => {
+        headline,
+        body,
+        contactInfo{
+          title,
+          companyName,
+          items[]{
+            _key,
+            icon,
+            text,
+            href
+          }
+        }
       }
     }
   }
