@@ -18,7 +18,9 @@ export const homePage = defineType({
         defineArrayMember({ type: 'servicesSection' }),
         defineArrayMember({ type: 'ecoSection' }),
         defineArrayMember({ type: 'quoteSection' }),
+        defineArrayMember({ type: 'supportSection' }),
       ],
+
 
       description: 'Drag to reorder page sections.',
     }),

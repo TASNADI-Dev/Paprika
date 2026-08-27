@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
 import Eco from '../components/Eco.astro';
 import Quote from '../components/Quote.astro';
+import Support from '../components/Support.astro';
 import { HOME_PAGE_QUERY } from '../lib/queries';
 
 const page = await sanityClient.fetch(HOME_PAGE_QUERY);
@@ -56,6 +57,8 @@ const PAGE_DESCRIPTION =
                   contactInfo={section.contactInfo}
                 />
               );
+            case 'supportSection':
+              return <Support />;
             default:
               return null;
           }
@@ -66,6 +69,7 @@ const PAGE_DESCRIPTION =
           <Services />
           <Eco />
           <Quote />
+          <Support />
         </>
       )
     }

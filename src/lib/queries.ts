@@ -46,6 +46,9 @@ export const HOME_PAGE_QUERY = defineQuery(`
             href
           }
         }
+      },
+      _type == "supportSection" => {
+        note
       }
     }
   }

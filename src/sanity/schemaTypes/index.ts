@@ -8,6 +8,7 @@ import { ecoSection } from './sections/ecoSection';
 import { heroSection } from './sections/heroSection';
 import { quoteSection } from './sections/quoteSection';
 import { servicesSection } from './sections/servicesSection';
+import { supportSection } from './sections/supportSection';
 
 export const schemaTypes = [
   homePage,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   heroSection,
   quoteSection,
   servicesSection,
+  supportSection,
 ];
