@@ -5,5 +5,6 @@
 import { homePage } from './pages/homePage';
 import { page } from './pages/page';
 import { heroSection } from './sections/heroSection';
+import { servicesSection } from './sections/servicesSection';
 
-export const schemaTypes = [homePage, page, heroSection];
+export const schemaTypes = [homePage, page, heroSection, servicesSection];

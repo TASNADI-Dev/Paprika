@@ -14,6 +14,16 @@ export const HOME_PAGE_QUERY = defineQuery(`
           ...,
           alt
         }
+      },
+      _type == "servicesSection" => {
+        headline,
+        body,
+        services[]{
+          _key,
+          icon,
+          title,
+          body
+        }
       }
     }
   }

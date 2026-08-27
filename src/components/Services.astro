@@ -1,0 +1,99 @@
+---
+import { asset } from '../lib/assets';
+
+interface ServiceItem {
+  _key?: string;
+  icon?: string | null;
+  title?: string | null;
+  body?: string | null;
+}
+
+interface Props {
+  headline?: string | null;
+  body?: string | null;
+  services?: ServiceItem[] | null;
+}
+
+const DEFAULT_SERVICES: ServiceItem[] = [
+  {
+    _key: 'multimaterial',
+    icon: 'ph ph-package',
+    title: 'Multimaterial Production',
+    body: 'We process a diverse array of materials, from wood and metal to cardboard and plastics. Every project is tailored to meet specific quality standards, functional requirements, and unique brand needs.',
+  },
+  {
+    _key: 'bespoke',
+    icon: 'ph ph-pencil-ruler',
+    title: 'Bespoke Design',
+    body: 'We engineer tailor-made POS solutions that seamlessly combine creativity and functionality. Our goal is to create high-impact, engaging displays that elevate your brand within the retail landscape.',
+  },
+  {
+    _key: 'eco',
+    icon: 'ph ph-leaf',
+    title: 'Eco-Design Expertise',
+    body: 'We utilize sustainable materials and eco-friendly manufacturing practices to minimize environmental impact. By optimizing material usage and streamlining product design, we eliminate waste while delivering cost-effective solutions for our partners.',
+  },
+  {
+    _key: 'technology',
+    icon: 'ph ph-cpu',
+    title: 'Technology',
+    body: 'We leverage cutting-edge technologies, including laser cutting, CNC machining, and 3D printing. Our state-of-the-art equipment ensures rapid turnaround, high precision, and premium manufacturing standards.',
+  },
+];
+
+const {
+  headline = 'Our Services',
+  body = 'We offer end-to-end POS solutions from design through to delivery. By combining custom design, precision prototyping, high-quality manufacturing, and reliable logistics, we empower our partners to ensure their products stand out in the retail environment.',
+  services,
+} = Astro.props;
+
+const title = headline || 'Our Services';
+const description =
+  body ||
+  'We offer end-to-end POS solutions from design through to delivery. By combining custom design, precision prototyping, high-quality manufacturing, and reliable logistics, we empower our partners to ensure their products stand out in the retail environment.';
+const items = services?.length ? services : DEFAULT_SERVICES;
+const dividerSrc = asset('/global/custom-divider.svg');
+---
+
+<section class="bg-white" aria-label="Our Services">
+  <div class="mx-auto max-w-container px-[6vw] py-24 max-md:py-16">
+    <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
+      <img
+        src={dividerSrc}
+        alt=""
+        width="88"
+        height="4"
+        class="mb-6 h-1 w-[88px]"
+        loading="lazy"
+        decoding="async"
+      />
+      <h2
+        class="font-heading text-4xl font-medium tracking-tight text-dark-gray max-md:text-3xl"
+      >
+        {title}
+      </h2>
+      <p class="mt-5 text-base leading-relaxed text-mid-gray-2 max-md:text-[0.95rem]">
+        {description}
+      </p>
+    </div>
+
+    <ul
+      class="mt-14 grid grid-cols-4 gap-5 max-lg:grid-cols-2 max-md:mt-10 max-md:grid-cols-1"
+      role="list"
+    >
+      {
+        items.map((service) => (
+          <li class="flex cursor-default flex-col rounded-xl bg-blue p-7 text-white transition-colors duration-300 hover:bg-red max-md:p-6">
+            {service.icon && (
+              <i class:list={[service.icon, 'text-[1.75rem] leading-none']} aria-hidden="true" />
+            )}
+            <h3 class="mt-5 font-heading text-xl font-medium tracking-tight">
+              {service.title}
+            </h3>
+            <p class="mt-3 text-sm leading-relaxed text-white/95">{service.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
