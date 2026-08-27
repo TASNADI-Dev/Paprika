@@ -1,0 +1,105 @@
+---
+import { asset } from '../lib/assets';
+
+interface ValueItem {
+  _key?: string;
+  icon?: string | null;
+  title?: string | null;
+  body?: string | null;
+}
+
+interface Props {
+  headline?: string | null;
+  body?: string | null;
+  values?: ValueItem[] | null;
+}
+
+const DEFAULT_VALUES: ValueItem[] = [
+  {
+    _key: 'quality',
+    icon: 'ph ph-seal-check',
+    title: 'Quality',
+    body: 'Precision execution, dependable results.',
+  },
+  {
+    _key: 'flexibility',
+    icon: 'ph ph-arrows-out-cardinal',
+    title: 'Flexibility',
+    body: 'Tailoring our solutions to your specific needs.',
+  },
+  {
+    _key: 'precision',
+    icon: 'ph ph-clock-countdown',
+    title: 'Precision & Timeliness',
+    body: 'Strictly adhering to agreed deadlines and specifications.',
+  },
+  {
+    _key: 'partnership',
+    icon: 'ph ph-handshake',
+    title: 'Partnership',
+    body: 'Building long-term, trust-based collaborations.',
+  },
+];
+
+const {
+  headline = 'The Value We Deliver to Our Partners',
+  body = 'We execute every project with a single goal: delivering reliable, high-quality, and effective POS solutions for our partners.',
+  values,
+} = Astro.props;
+
+const title = headline || 'The Value We Deliver to Our Partners';
+const description =
+  body ||
+  'We execute every project with a single goal: delivering reliable, high-quality, and effective POS solutions for our partners.';
+const items = values?.length ? values : DEFAULT_VALUES;
+const dividerSrc = asset('/global/custom-divider.svg');
+---
+
+<section class="bg-white" aria-label="The value we deliver">
+  <div class="mx-auto max-w-container px-[6vw] py-24 max-md:py-16">
+    <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
+      <img
+        src={dividerSrc}
+        alt=""
+        width="88"
+        height="4"
+        class="mb-6 h-1 w-[88px]"
+        loading="lazy"
+        decoding="async"
+      />
+      <h2
+        class="font-heading text-[56px] font-medium leading-tight tracking-tight text-dark-gray max-md:text-3xl"
+      >
+        {title}
+      </h2>
+      <p class="mt-5 text-base leading-relaxed text-mid-gray-2 max-md:text-[0.95rem]">
+        {description}
+      </p>
+    </div>
+
+    <ul
+      class="mt-14 grid grid-cols-4 gap-8 max-lg:grid-cols-2 max-md:mt-10 max-md:grid-cols-1 max-md:gap-10"
+      role="list"
+    >
+      {
+        items.map((item) => (
+          <li class="flex flex-col items-center text-center">
+            {item.icon && (
+              <i
+                class:list={[
+                  item.icon,
+                  'text-[48px] leading-none text-green',
+                ]}
+                aria-hidden="true"
+              />
+            )}
+            <h3 class="mt-5 font-heading text-[32px] font-medium tracking-tight text-dark-gray max-md:text-xl">
+              {item.title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-mid-gray-2">{item.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

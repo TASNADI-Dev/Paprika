@@ -16,6 +16,7 @@ export const aboutPage = defineType({
       of: [
         defineArrayMember({ type: 'aboutHeroSection' }),
         defineArrayMember({ type: 'aboutIntroSection' }),
+        defineArrayMember({ type: 'aboutValuesSection' }),
       ],
       description: 'Drag to reorder page sections.',
     }),

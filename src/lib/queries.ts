@@ -76,6 +76,16 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
           body
         },
         ctaLabel
+      },
+      _type == "aboutValuesSection" => {
+        headline,
+        body,
+        values[]{
+          _key,
+          icon,
+          title,
+          body
+        }
       }
     }
   }

@@ -3,6 +3,7 @@ import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
 import AboutHero from '../components/AboutHero.astro';
 import AboutIntro from '../components/AboutIntro.astro';
+import AboutValues from '../components/AboutValues.astro';
 import { ABOUT_PAGE_QUERY } from '../lib/queries';
 
 const page = await sanityClient.fetch(ABOUT_PAGE_QUERY);
@@ -37,6 +38,14 @@ const PAGE_DESCRIPTION =
                   ctaLabel={section.ctaLabel}
                 />
               );
+            case 'aboutValuesSection':
+              return (
+                <AboutValues
+                  headline={section.headline}
+                  body={section.body}
+                  values={section.values}
+                />
+              );
             default:
               return null;
           }
@@ -45,6 +54,7 @@ const PAGE_DESCRIPTION =
         <>
           <AboutHero />
           <AboutIntro />
+          <AboutValues />
         </>
       )
     }

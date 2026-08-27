@@ -6,6 +6,7 @@ import { aboutPage } from './pages/aboutPage';
 import { homePage } from './pages/homePage';
 import { aboutHeroSection } from './sections/aboutHeroSection';
 import { aboutIntroSection } from './sections/aboutIntroSection';
+import { aboutValuesSection } from './sections/aboutValuesSection';
 import { ecoSection } from './sections/ecoSection';
 import { heroSection } from './sections/heroSection';
 import { quoteSection } from './sections/quoteSection';
@@ -19,6 +20,7 @@ export const schemaTypes = [
   footer,
   aboutHeroSection,
   aboutIntroSection,
+  aboutValuesSection,
   ecoSection,
   heroSection,
   quoteSection,
