@@ -4,7 +4,14 @@
  */
 import { homePage } from './pages/homePage';
 import { page } from './pages/page';
+import { ecoSection } from './sections/ecoSection';
 import { heroSection } from './sections/heroSection';
 import { servicesSection } from './sections/servicesSection';
 
-export const schemaTypes = [homePage, page, heroSection, servicesSection];
+export const schemaTypes = [
+  homePage,
+  page,
+  ecoSection,
+  heroSection,
+  servicesSection,
+];

@@ -3,6 +3,7 @@ import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
+import Eco from '../components/Eco.astro';
 import { HOME_PAGE_QUERY } from '../lib/queries';
 
 const page = await sanityClient.fetch(HOME_PAGE_QUERY);
@@ -38,6 +39,14 @@ const PAGE_DESCRIPTION =
                   services={section.services}
                 />
               );
+            case 'ecoSection':
+              return (
+                <Eco
+                  headline={section.headline}
+                  body={section.body}
+                  image={section.image}
+                />
+              );
             default:
               return null;
           }
@@ -46,6 +55,7 @@ const PAGE_DESCRIPTION =
         <>
           <Hero />
           <Services />
+          <Eco />
         </>
       )
     }

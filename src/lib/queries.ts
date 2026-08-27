@@ -24,6 +24,14 @@ export const HOME_PAGE_QUERY = defineQuery(`
           title,
           body
         }
+      },
+      _type == "ecoSection" => {
+        headline,
+        body,
+        image{
+          ...,
+          alt
+        }
       }
     }
   }

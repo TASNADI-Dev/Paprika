@@ -1,0 +1,72 @@
+---
+import { urlFor } from '../lib/sanityImage';
+
+interface EcoImage {
+  asset?: { _ref?: string; _id?: string } | null;
+  alt?: string | null;
+  hotspot?: unknown;
+  crop?: unknown;
+}
+
+interface Props {
+  headline?: string | null;
+  body?: string | null;
+  image?: EcoImage | null;
+}
+
+const DEFAULT_BODY = [
+  'Today, sustainability is no longer merely an option—it is a cornerstone of responsible manufacturing. We are committed to implementing solutions across every stage of the design and production process that reduce our environmental footprint while continuing to meet the highest quality standards.',
+  'Through thoughtful material selection, streamlined design, and efficient manufacturing workflows, we actively minimize material scrap and waste generation. With a wide range of recycled raw materials now available, we give strong preference to eco-conscious inputs. For example, our manufacturing processes utilize High Impact Polystyrene (HIPS) containing up to 80% recycled plastic, directly supporting the circular economy and driving sustainable manufacturing.',
+  'We believe that combining sustainable thinking with advanced manufacturing technology yields solutions that are both eco-friendly and economically viable. Our goal is to provide our partners with POS solutions that not only reflect their brand values, but also directly address the challenges of tomorrow.',
+].join('\n\n');
+
+const { headline = 'ECO', body = DEFAULT_BODY, image } = Astro.props;
+
+const title = headline || 'ECO';
+const paragraphs = (body || DEFAULT_BODY)
+  .split(/\n\s*\n/)
+  .map((p) => p.trim())
+  .filter(Boolean);
+const imageSrc = image?.asset
+  ? urlFor(image).width(1200).quality(80).auto('format').url()
+  : null;
+const imageAlt = image?.alt || 'Sustainable POS display';
+---
+
+<section class="bg-[var(--color-green)] text-white" aria-label="Eco">
+  <div
+    class="mx-auto grid max-w-container grid-cols-12 items-start gap-16 px-[6vw] py-24 max-lg:gap-10 max-md:gap-10 max-md:py-16"
+  >
+    {
+      imageSrc && (
+        <figure class="col-span-3 overflow-hidden rounded-2xl bg-white shadow-lg max-md:order-2 max-md:col-span-4">
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            width="800"
+            height="1200"
+            class="w-full object-cover object-top max-md:max-h-[70vh]"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      )
+    }
+
+    <div
+      class:list={[
+        'col-span-9 max-md:order-1 max-md:col-span-full',
+        !imageSrc && 'col-span-full',
+      ]}
+    >
+      <h2
+        class="font-heading text-5xl font-medium tracking-tight max-md:text-4xl"
+      >
+        {title}
+      </h2>
+      <div class="mt-8 space-y-6 text-base leading-relaxed text-white/95 max-md:mt-6 max-md:text-[0.95rem]">
+        {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+  </div>
+</section>
