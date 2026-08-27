@@ -51,7 +51,7 @@ alwaysApply: true
 ## JavaScript Organization & Formatting
 
 * **Modular Files:** Do **not** write monolithic `<script>` tags or massive single JS/TS files. Split logic into small, modular files organized logically in `src/scripts/` or alongside the component.
-* **Header Comment Required:** Every JS/TS file **must** start with a brief 1–2 line comment explaining its core purpose.
+* **Header Comment Required:** Every JS/TS file **must** start with a brief 1–2 line comment explaining its core purpose. Don't add comments to other file types.
 
 ## Live Site Reference
 

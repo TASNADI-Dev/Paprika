@@ -1,0 +1,110 @@
+---
+import Button from './Button.astro';
+import { asset } from '../lib/assets';
+
+const links = [
+  { label: 'Products', href: '#' },
+  { label: 'About Us', href: '#' },
+];
+---
+
+<header
+  data-nav
+  data-nav-open="false"
+  class="sticky top-0 z-50 border-b border-mid-gray-1 bg-white text-mid-dark"
+>
+  <div
+    class="mx-auto flex max-w-container items-center justify-between gap-4 px-[6vw] py-2.5 lg:gap-8"
+  >
+    <a href="/" class="shrink-0 leading-none" aria-label="Paprika Advertising home">
+      <img
+        src={asset('/global/logo.webp')}
+        alt="Paprika Advertising"
+        width="182"
+        height="48"
+        class="h-auto w-[7.5rem]"
+        loading="eager"
+        decoding="async"
+      />
+    </a>
+
+    <div class="flex items-center gap-3 lg:gap-6">
+      <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="px-3 py-2 text-base text-mid-dark transition-colors duration-300 hover:text-blue"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <Button href="#" label="Request a Quote" />
+
+      <div class="hidden items-center gap-2 text-sm lg:flex" aria-label="Language">
+        <a href="#" class="underline" hreflang="en" aria-current="true">EN</a>
+        <a href="#" class="transition-colors duration-300 hover:text-blue" hreflang="fr">FR</a>
+      </div>
+
+      <button
+        type="button"
+        data-nav-toggle
+        class="relative flex h-10 w-10 items-center justify-center lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <span class="sr-only">Menu</span>
+        <span class="relative block h-[17px] w-6" aria-hidden="true">
+          <span
+            data-nav-bar="top"
+            class="absolute left-0 top-0 block h-px w-full origin-center bg-mid-dark"
+          ></span>
+          <span
+            data-nav-bar="middle"
+            class="absolute left-0 top-[8px] block h-px w-full origin-center bg-mid-dark"
+          ></span>
+          <span
+            data-nav-bar="bottom"
+            class="absolute left-0 bottom-0 block h-px w-full origin-center bg-mid-dark"
+          ></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-nav"
+    data-nav-panel
+    hidden
+    class="absolute inset-x-0 top-full h-[calc(100svh-100%)] overflow-y-auto bg-white lg:hidden"
+  >
+    <nav
+      class="mx-auto flex max-w-container flex-col gap-6 px-[6vw] py-10"
+      aria-label="Mobile"
+    >
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="text-base text-mid-dark transition-colors duration-300 hover:text-blue"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+
+      <div class="flex items-center gap-3 pt-2 text-sm" aria-label="Language">
+        <a href="#" class="underline" hreflang="en" aria-current="true">EN</a>
+        <a href="#" class="transition-colors duration-300 hover:text-blue" hreflang="fr">FR</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  import '../scripts/navigation.ts';
+</script>
