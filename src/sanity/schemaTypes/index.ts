@@ -3,7 +3,6 @@
  * compose and reorder page content in Studio.
  */
 import { homePage } from './pages/homePage';
-import { page } from './pages/page';
 import { ecoSection } from './sections/ecoSection';
 import { heroSection } from './sections/heroSection';
 import { quoteSection } from './sections/quoteSection';
@@ -12,7 +11,6 @@ import { supportSection } from './sections/supportSection';
 
 export const schemaTypes = [
   homePage,
-  page,
   ecoSection,
   heroSection,
   quoteSection,
