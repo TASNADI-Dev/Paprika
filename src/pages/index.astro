@@ -1,14 +1,41 @@
 ---
+import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import { HOME_PAGE_QUERY } from '../lib/queries';
+
+const page = await sanityClient.fetch(HOME_PAGE_QUERY);
+const sections = page?.sections ?? [];
+
+type PageSection = NonNullable<typeof sections>[number];
+
+const PAGE_TITLE = 'Paprika | Paprika Advertising';
+const PAGE_DESCRIPTION =
+  'French-Hungarian POS advertising agency based in Budapest. Custom point-of-sale displays, sustainable materials, and full-service design and production.';
 ---
 
-<Layout title="Paprika">
-  <main class="mx-auto max-w-container px-6 py-16">
-    <h1 class="font-heading text-4xl text-blue">Paprika</h1>
-    <p class="mt-4 text-mid-gray-2">
-      Tailwind and Sanity are installed. Create a Sanity project, add your
-      project ID to <code class="text-red">.env</code>, then open
-      <a class="text-green underline" href="/admin">/admin</a> for Studio.
-    </p>
+<Layout title={PAGE_TITLE} description={PAGE_DESCRIPTION}>
+  <main>
+    {
+      sections.length > 0 ? (
+        sections.map((section: PageSection) => {
+          switch (section._type) {
+            case 'heroSection':
+              return (
+                <Hero
+                  headline={section.headline}
+                  body={section.body}
+                  ctaLabel={section.ctaLabel}
+                  image={section.image}
+                />
+              );
+            default:
+              return null;
+          }
+        })
+      ) : (
+        <Hero />
+      )
+    }
   </main>
 </Layout>

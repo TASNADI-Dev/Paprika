@@ -1,5 +1,6 @@
 /**
- * Hero section block: editable headline, body, CTA, and image with alt text.
+ * Hero section block: editable headline, body, CTA label, and background image.
+ * CTA link stays code-owned.
  */
 import { defineField, defineType } from 'sanity';
 
@@ -26,13 +27,8 @@ export const heroSection = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'ctaHref',
-      title: 'CTA link',
-      type: 'string',
-    }),
-    defineField({
       name: 'image',
-      title: 'Image',
+      title: 'Background image',
       type: 'image',
       options: { hotspot: true },
       fields: [
@@ -43,6 +39,7 @@ export const heroSection = defineType({
           validation: (rule) => rule.required(),
         }),
       ],
+      validation: (rule) => rule.required(),
     }),
   ],
   preview: {

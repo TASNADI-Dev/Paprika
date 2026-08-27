@@ -1,0 +1,64 @@
+---
+import Button from './Button.astro';
+import { asset } from '../lib/assets';
+import { urlFor } from '../lib/sanityImage';
+
+interface HeroImage {
+  asset?: { _ref?: string; _id?: string } | null;
+  alt?: string | null;
+  hotspot?: unknown;
+  crop?: unknown;
+}
+
+interface Props {
+  headline?: string | null;
+  body?: string | null;
+  ctaLabel?: string | null;
+  image?: HeroImage | null;
+}
+
+const CTA_HREF = '#';
+
+const {
+  headline = 'Paprika Advertising',
+  body = 'Paprika Advertising is a French-Hungarian POS Advertising agency',
+  ctaLabel = 'Request a Quote',
+  image,
+} = Astro.props;
+
+const imageSrc = image?.asset
+  ? urlFor(image).width(2400).quality(80).auto('format').url()
+  : asset('/counter-display/1-03.webp');
+const imageAlt = image?.alt || 'Philips Baristina point-of-sale display';
+const title = headline || 'Paprika Advertising';
+const description =
+  body || 'Paprika Advertising is a French-Hungarian POS Advertising agency';
+const buttonLabel = ctaLabel || 'Request a Quote';
+---
+
+<section
+  class="relative flex min-h-[calc(100svh-var(--nav-height))] items-center justify-center overflow-hidden"
+  aria-label="Hero"
+>
+  <img
+    src={imageSrc}
+    alt={imageAlt}
+    width="1920"
+    height="1080"
+    class="absolute inset-0 size-full object-cover"
+    loading="eager"
+    decoding="async"
+    fetchpriority="high"
+  />
+  <div class="absolute inset-0 bg-dark-gray/60" aria-hidden="true"></div>
+
+  <div
+    class="relative z-10 mx-auto flex max-w-container flex-col items-center px-[6vw] py-16 text-center text-white"
+  >
+    <h1 class="font-heading text-5xl font-medium tracking-tight max-md:text-3xl max-lg:text-4xl">
+      {title}
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-white/95 max-md:text-base">{description}</p>
+    <Button href={CTA_HREF} label={buttonLabel} class="mt-8" />
+  </div>
+</section>

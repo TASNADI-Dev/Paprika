@@ -1,7 +1,7 @@
 /**
- * Page document with an ordered array of sections editable in Sanity.
+ * Generic page document with an ordered array of sections editable in Sanity.
  */
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const page = defineType({
   name: 'page',
@@ -25,7 +25,7 @@ export const page = defineType({
       name: 'sections',
       title: 'Sections',
       type: 'array',
-      of: [{ type: 'heroSection' }],
+      of: [defineArrayMember({ type: 'heroSection' })],
       description: 'Drag to reorder page sections.',
     }),
   ],
