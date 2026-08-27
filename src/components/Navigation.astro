@@ -4,10 +4,9 @@ import { asset } from '../lib/assets';
 import { withBase } from '../lib/paths';
 
 const links = [
-  { label: 'Products', href: '#' },
+  { label: 'Products', href: withBase('/products') },
   { label: 'About Us', href: withBase('/about-us') },
-];
----
+];---
 
 <header
   data-nav

@@ -91,6 +91,60 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
   }
 `);
 
+export const PRODUCTS_PAGE_QUERY = defineQuery(`
+  *[_type == "productsPage" && _id == "products"][0]{
+    floorStand{
+      body,
+      images[]{
+        ...,
+        alt
+      }
+    },
+    counter{
+      body,
+      images[]{
+        ...,
+        alt
+      }
+    },
+    shelfOrganizer{
+      body,
+      images[]{
+        ...,
+        alt
+      }
+    },
+    busStopFrame{
+      body,
+      images[]{
+        ...,
+        alt
+      }
+    },
+    crossMerch{
+      body,
+      images[]{
+        ...,
+        alt
+      }
+    },
+    testerGlorifier{
+      body,
+      images[]{
+        ...,
+        alt
+      }
+    },
+    eco{
+      body,
+      images[]{
+        ...,
+        alt
+      }
+    }
+  }
+`);
+
 export const PRIVACY_PAGE_QUERY = defineQuery(`
   *[_type == "privacyPage" && _id == "privacy"][0]{
     title,

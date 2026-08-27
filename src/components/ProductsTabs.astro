@@ -1,0 +1,178 @@
+---
+import { asset } from '../lib/assets';
+import { PRODUCT_TABS, type ProductTabField } from '../lib/productTabs';
+import { urlFor } from '../lib/sanityImage';
+
+interface CategoryImage {
+  _key?: string;
+  asset?: { _ref?: string; _id?: string } | null;
+  alt?: string | null;
+  hotspot?: unknown;
+  crop?: unknown;
+}
+
+interface CategoryContent {
+  body?: string | null;
+  images?: CategoryImage[] | null;
+}
+
+type Categories = Partial<Record<ProductTabField, CategoryContent | null>>;
+
+interface Props {
+  categories?: Categories | null;
+}
+
+const DEFAULT_BODIES: Record<ProductTabField, string> = {
+  floorStand:
+    'A floor stand, or freestanding display unit (FSDU), is one of the most effective point-of-sale marketing tools. Positioned in high-traffic areas of the store, it elevates products off the standard shelf, maximizes visibility, and drives impulse purchases. Custom-designed in shape and dimensions, it aligns seamlessly with brand identity and promotional campaigns.',
+  counter:
+    'A counter display (CDU) is a compact marketing solution designed for checkout areas, retail counters, and store shelves. Ideal for showcasing smaller products, new arrivals, or promotional offers, it captures attention directly at the point of purchase, significantly boosting impulse sales.',
+  shelfOrganizer:
+    'A shelf organizer structures store shelves and highlights featured products. It brings clarity to product ranges, guides shopper focus, and ensures a clean, consistent brand presentation on-shelf—making it a powerful tool for brand building and strengthening shelf presence.',
+  busStopFrame:
+    'The Bus Stop Frame is a large-format framed display unit designed for endcaps and high-visibility retail locations. It ensures promotions and campaigns are clearly visible from a distance, effectively steering shopper footfall toward specific product categories.',
+  crossMerch:
+    'A cross-merchandiser is a display solution engineered to showcase complementary products side by side. It encourages cross-selling, increases basket size, and makes it effortless for shoppers to pick up related items—such as pairing soft drinks with snacks.',
+  testerGlorifier:
+    'Tester and glorifier displays are designed to spotlight premium products and elevate the overall in-store experience. Testers invite shoppers to try and interact with the product, while glorifiers deliver an exclusive presentation that underscores luxury and quality. They are especially popular in cosmetics, beauty, spirits, and premium FMCG sectors.',
+  eco:
+    'The Eco category features point-of-sale displays crafted from eco-friendly, sustainable materials. Built using recycled or fully recyclable components, these solutions deliver high-impact brand communication without compromising environmental responsibility—making them the ideal choice for companies prioritizing sustainability.',
+};
+
+const { categories } = Astro.props;
+const dividerSrc = asset('/global/custom-divider.svg');
+
+const tabs = PRODUCT_TABS.map((tab) => {
+  const content = categories?.[tab.field];
+  return {
+    ...tab,
+    body: content?.body?.trim() || DEFAULT_BODIES[tab.field],
+    images: (content?.images ?? []).filter((image) => image?.asset),
+  };
+});
+---
+
+<section class="bg-white" aria-label="Products" data-products-tabs>
+  <div class="mx-auto max-w-container px-[6vw] pb-24 pt-16 max-md:pb-16 max-md:pt-12">
+    <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
+      <img
+        src={dividerSrc}
+        alt=""
+        width="88"
+        height="4"
+        class="mb-6 h-1 w-[88px]"
+        loading="eager"
+        decoding="async"
+      />
+      <h1
+        class="font-heading text-[80px] font-medium tracking-tight text-dark-gray max-md:text-3xl max-lg:text-4xl"
+      >
+        Products
+      </h1>
+    </div>
+
+    <div class="mt-10 lg:mt-12">
+      <div class="relative lg:hidden">
+        <label for="products-category-select" class="sr-only">Product category</label>
+        <select
+          id="products-category-select"
+          data-products-select
+          class="w-full appearance-none rounded-lg border border-mid-gray-1 bg-white px-4 py-3 pr-10 text-base text-dark-gray"
+        >
+          {
+            tabs.map((tab) => (
+              <option value={tab.id}>{tab.label}</option>
+            ))
+          }
+        </select>
+        <i
+          class="ph ph-caret-down pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-lg text-mid-gray-2"
+          aria-hidden="true"
+        ></i>
+      </div>
+
+      <div
+        role="tablist"
+        aria-label="Product categories"
+        class="hidden w-full lg:flex"
+      >
+        {
+          tabs.map((tab, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`tab-${tab.id}`}
+              data-tab-id={tab.id}
+              aria-controls={`panel-${tab.id}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              tabindex={index === 0 ? 0 : -1}
+              class="products-tab flex-1 cursor-pointer border-b-2 border-mid-gray-1 pb-2 text-center text-base text-mid-gray-1 transition-colors duration-300 hover:text-blue aria-selected:border-blue aria-selected:text-blue"
+            >
+              {tab.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    {
+      tabs.map((tab, index) => (
+        <div
+          role="tabpanel"
+          id={`panel-${tab.id}`}
+          data-panel-id={tab.id}
+          aria-labelledby={`tab-${tab.id}`}
+          hidden={index !== 0}
+          class="mt-10 max-md:mt-8"
+        >
+          <p class="w-full text-base leading-relaxed text-mid-gray-2 max-md:text-[0.95rem]">
+            {tab.body}
+          </p>
+
+          {tab.images.length > 0 && (
+            <div class="products-gallery mt-10 max-md:mt-8">
+              {tab.images.map((image) => {
+                const src = urlFor(image).width(900).quality(80).auto('format').url();
+                const alt = image.alt || tab.label;
+                return (
+                  <img
+                    src={src}
+                    alt={alt}
+                    width="600"
+                    height="800"
+                    class="mb-4 w-full break-inside-avoid rounded-lg"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                );
+              })}
+            </div>
+          )}
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .products-gallery {
+    column-count: 3;
+    column-gap: 1rem;
+  }
+
+  @media (max-width: 1023px) {
+    .products-gallery {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .products-gallery {
+      column-count: 1;
+    }
+  }
+</style>
+
+<script>
+  import '../scripts/productsTabs.ts';
+</script>

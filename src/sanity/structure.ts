@@ -1,10 +1,11 @@
 /**
- * Studio desk structure: site-wide singletons (Home, About, Privacy, Footer).
+ * Studio desk structure: site-wide singletons (Home, About, Products, Privacy, Footer).
  */
 import type { StructureResolver } from 'sanity/structure';
 
 const HOME_ID = 'home';
 const ABOUT_ID = 'about';
+const PRODUCTS_ID = 'products';
 const PRIVACY_ID = 'privacy';
 const FOOTER_ID = 'footer';
 
@@ -29,6 +30,15 @@ export const structure: StructureResolver = (S) =>
             .schemaType('aboutPage')
             .documentId(ABOUT_ID)
             .title('About'),
+        ),
+      S.listItem()
+        .title('Products')
+        .id(PRODUCTS_ID)
+        .child(
+          S.document()
+            .schemaType('productsPage')
+            .documentId(PRODUCTS_ID)
+            .title('Products'),
         ),
       S.listItem()
         .title('Privacy Policy')
