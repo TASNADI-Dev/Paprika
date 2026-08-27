@@ -1,0 +1,40 @@
+---
+import { sanityClient } from 'sanity:client';
+import Layout from '../layouts/Layout.astro';
+import PrivacyBody from '../components/PrivacyBody.astro';
+import { PRIVACY_PAGE_QUERY } from '../lib/queries';
+
+const page = await sanityClient.fetch(PRIVACY_PAGE_QUERY);
+
+const title = page?.title || 'Privacy Policy';
+const body = page?.body ?? null;
+
+const PAGE_TITLE = 'Privacy Policy | Paprika Advertising';
+const PAGE_DESCRIPTION =
+  'How Paprika Advertising collects, uses, and protects personal data.';
+---
+
+<Layout title={PAGE_TITLE} description={PAGE_DESCRIPTION}>
+  <main class="bg-white">
+    <div class="mx-auto max-w-container px-[6vw] py-24 max-md:py-16">
+      <article class="max-w-[680px] text-left">
+        <h1
+          class="font-heading text-[80px] font-medium tracking-tight text-dark-gray max-md:text-3xl max-lg:text-4xl"
+        >
+          {title}
+        </h1>
+        {
+          body ? (
+            <div class="mt-10">
+              <PrivacyBody value={body} />
+            </div>
+          ) : (
+            <p class="mt-10 text-base leading-relaxed text-mid-gray-2">
+              Privacy policy content is not available yet.
+            </p>
+          )
+        }
+      </article>
+    </div>
+  </main>
+</Layout>

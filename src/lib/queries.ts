@@ -91,6 +91,21 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
   }
 `);
 
+export const PRIVACY_PAGE_QUERY = defineQuery(`
+  *[_type == "privacyPage" && _id == "privacy"][0]{
+    title,
+    body[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "link" => {
+          href
+        }
+      }
+    }
+  }
+`);
+
 export const FOOTER_QUERY = defineQuery(`
   *[_type == "footer" && _id == "footer"][0]{
     slogan,

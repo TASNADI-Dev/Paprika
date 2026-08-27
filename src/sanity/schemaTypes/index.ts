@@ -4,6 +4,7 @@
  */
 import { aboutPage } from './pages/aboutPage';
 import { homePage } from './pages/homePage';
+import { privacyPage } from './pages/privacyPage';
 import { aboutHeroSection } from './sections/aboutHeroSection';
 import { aboutIntroSection } from './sections/aboutIntroSection';
 import { aboutValuesSection } from './sections/aboutValuesSection';
@@ -17,6 +18,7 @@ import { footer } from './singletons/footer';
 export const schemaTypes = [
   homePage,
   aboutPage,
+  privacyPage,
   footer,
   aboutHeroSection,
   aboutIntroSection,

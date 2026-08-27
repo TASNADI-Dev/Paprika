@@ -1,0 +1,78 @@
+---
+import { PortableText } from 'astro-portabletext';
+import type { PortableTextProps } from 'astro-portabletext/types';
+
+interface Props {
+  value: PortableTextProps['value'];
+}
+
+const { value } = Astro.props;
+---
+
+{
+  value && (
+    <div class="privacy-body text-base leading-relaxed text-mid-gray-2 max-md:text-[0.95rem]">
+      <PortableText value={value} />
+    </div>
+  )
+}
+
+<style>
+  .privacy-body :global(> *:first-child) {
+    margin-top: 0;
+  }
+
+  .privacy-body :global(p),
+  .privacy-body :global(ul),
+  .privacy-body :global(ol) {
+    margin-top: 1.25rem;
+  }
+
+  .privacy-body :global(h2) {
+    margin-top: 2.5rem;
+    font-family: var(--font-heading), sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: #292825;
+  }
+
+  .privacy-body :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+  }
+
+  .privacy-body :global(ol) {
+    list-style-type: decimal;
+    padding-left: 1.25rem;
+  }
+
+  .privacy-body :global(li + li) {
+    margin-top: 0.5rem;
+  }
+
+  .privacy-body :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 300ms;
+  }
+
+  .privacy-body :global(a:hover) {
+    color: #385da2;
+  }
+
+  .privacy-body :global(strong) {
+    font-weight: 700;
+    color: #292825;
+  }
+
+  .privacy-body :global(em) {
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .privacy-body :global(h2) {
+      font-size: 1.25rem;
+    }
+  }
+</style>
