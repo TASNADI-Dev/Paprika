@@ -19,6 +19,18 @@ export default defineConfig({
   base: '/Paprika',
   vite: {
     plugins: [tailwindcss()],
+    // Pre-bundle Studio deps so Vite doesn't re-optimize mid-session
+    // (which causes 504 "Outdated Optimize Dep" during image uploads).
+    optimizeDeps: {
+      include: [
+        'react',
+        'react-dom',
+        'react-is',
+        'styled-components',
+        'sanity',
+        '@sanity/client',
+      ],
+    },
   },
   integrations: [
     sanity({

@@ -1,0 +1,59 @@
+---
+import { urlFor } from '../lib/sanityImage';
+
+interface HeroImage {
+  asset?: { _ref?: string; _id?: string } | null;
+  alt?: string | null;
+  hotspot?: unknown;
+  crop?: unknown;
+}
+
+interface Props {
+  headline?: string | null;
+  body?: string | null;
+  image?: HeroImage | null;
+}
+
+const {
+  headline = 'About Us',
+  body = 'A creative agency that lead and inspire',
+  image,
+} = Astro.props;
+
+const imageSrc = image?.asset
+  ? urlFor(image).width(2400).quality(80).auto('format').url()
+  : null;
+const imageAlt = image?.alt || 'Paprika Advertising team at work';
+const title = headline || 'About Us';
+const description = body || 'A creative agency that lead and inspire';
+---
+
+<section
+  class="relative flex min-h-[min(52svh,28rem)] items-center overflow-hidden bg-mid-dark"
+  aria-label="About hero"
+>
+  {
+    imageSrc && (
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        width="1920"
+        height="1080"
+        class="absolute inset-0 size-full object-cover"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    )
+  }
+  <div class="absolute inset-0 bg-mid-dark/70" aria-hidden="true"></div>
+
+  <div
+    class="relative z-10 mx-auto w-full max-w-container px-[6vw] py-16 text-left text-white"
+  >
+    <h1 class="font-heading text-5xl font-medium tracking-tight max-md:text-3xl max-lg:text-4xl">
+      {title}
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-white/95 max-md:text-base">{description}</p>
+  </div>
+</section>

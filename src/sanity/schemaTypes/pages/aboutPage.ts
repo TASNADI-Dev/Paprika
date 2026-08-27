@@ -1,0 +1,25 @@
+/**
+ * About page singleton: reorderable sections only.
+ * Document title and SEO meta stay code-owned.
+ */
+import { defineArrayMember, defineField, defineType } from 'sanity';
+
+export const aboutPage = defineType({
+  name: 'aboutPage',
+  title: 'About',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'sections',
+      title: 'Sections',
+      type: 'array',
+      of: [defineArrayMember({ type: 'aboutHeroSection' })],
+      description: 'Drag to reorder page sections.',
+    }),
+  ],
+  preview: {
+    prepare() {
+      return { title: 'About' };
+    },
+  },
+});

@@ -54,6 +54,23 @@ export const HOME_PAGE_QUERY = defineQuery(`
   }
 `);
 
+export const ABOUT_PAGE_QUERY = defineQuery(`
+  *[_type == "aboutPage" && _id == "about"][0]{
+    sections[]{
+      _key,
+      _type,
+      _type == "aboutHeroSection" => {
+        headline,
+        body,
+        image{
+          ...,
+          alt
+        }
+      }
+    }
+  }
+`);
+
 export const FOOTER_QUERY = defineQuery(`
   *[_type == "footer" && _id == "footer"][0]{
     slogan,
