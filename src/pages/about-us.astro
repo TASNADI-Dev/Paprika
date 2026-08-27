@@ -2,6 +2,7 @@
 import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
 import AboutHero from '../components/AboutHero.astro';
+import AboutIntro from '../components/AboutIntro.astro';
 import { ABOUT_PAGE_QUERY } from '../lib/queries';
 
 const page = await sanityClient.fetch(ABOUT_PAGE_QUERY);
@@ -28,12 +29,23 @@ const PAGE_DESCRIPTION =
                   image={section.image}
                 />
               );
+            case 'aboutIntroSection':
+              return (
+                <AboutIntro
+                  body={section.body}
+                  highlights={section.highlights}
+                  ctaLabel={section.ctaLabel}
+                />
+              );
             default:
               return null;
           }
         })
       ) : (
-        <AboutHero />
+        <>
+          <AboutHero />
+          <AboutIntro />
+        </>
       )
     }
   </main>

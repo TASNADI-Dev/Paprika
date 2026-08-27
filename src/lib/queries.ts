@@ -66,6 +66,16 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
           ...,
           alt
         }
+      },
+      _type == "aboutIntroSection" => {
+        body,
+        highlights[]{
+          _key,
+          icon,
+          title,
+          body
+        },
+        ctaLabel
       }
     }
   }

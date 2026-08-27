@@ -1,0 +1,108 @@
+---
+import Button from './Button.astro';
+import { withBase } from '../lib/paths';
+
+interface HighlightItem {
+  _key?: string;
+  icon?: string | null;
+  title?: string | null;
+  body?: string | null;
+}
+
+interface Props {
+  body?: string | null;
+  highlights?: HighlightItem[] | null;
+  ctaLabel?: string | null;
+}
+
+const CTA_HREF = withBase('#quote');
+
+const ICON_COLORS = ['text-blue', 'text-red', 'text-green'] as const;
+
+const DEFAULT_BODY = [
+  'Paprika Advertising is a Budapest-based Franco-Hungarian company specializing in the design and production of custom Point of Sale (POS) displays. For over 25 years, we have been crafting in-store solutions that elevate brand and product visibility across retail environments.',
+  'Our in-house team manages every project end-to-end, from initial design through to final production. Manufacturing takes place in our own specialized workshop and through an established international partner network. We work with cardboard, plastic, metal, wood, and textiles, tailoring every display to the exact specifications of the project.',
+  'Our focus is rooted in reliability, flawless execution, and building lasting client relationships. The vast majority of our production is delivered to Western Europe, with a primary focus on the French market.',
+].join('\n\n');
+
+const DEFAULT_HIGHLIGHTS: HighlightItem[] = [
+  {
+    _key: 'experience',
+    icon: 'ph-fill ph-circle',
+    title: '35+ Years of Experience',
+    body: 'Design and manufacturing of bespoke POS solutions for international partners.',
+  },
+  {
+    _key: 'execution',
+    icon: 'ph-fill ph-circle',
+    title: 'End-to-End Execution',
+    body: 'Design, prototyping, production, and logistics—all handled under one roof.',
+  },
+  {
+    _key: 'export',
+    icon: 'ph-fill ph-circle',
+    title: '98% Export Rate',
+    body: 'The vast majority of our production is exported to Western Europe, primarily France and Germany.',
+  },
+];
+
+const {
+  body = DEFAULT_BODY,
+  highlights,
+  ctaLabel = 'Request a Quote',
+} = Astro.props;
+
+const paragraphs = (body || DEFAULT_BODY)
+  .split(/\n\s*\n/)
+  .map((p: string) => p.trim())
+  .filter(Boolean);
+const items = highlights?.length ? highlights : DEFAULT_HIGHLIGHTS;
+const buttonLabel = ctaLabel || 'Request a Quote';
+---
+
+<section class="bg-light-gray" aria-label="About intro">
+  <div
+    class="mx-auto grid max-w-container grid-cols-12 items-start gap-16 px-[6vw] py-24 max-lg:grid-cols-1 max-lg:gap-12 max-md:gap-10 max-md:py-16"
+  >
+    <div class="col-span-7 space-y-6 text-[20px] leading-relaxed text-mid-gray-2 max-lg:col-span-full">
+      {paragraphs.map((paragraph: string) => <p>{paragraph}</p>)}
+    </div>
+
+    <div class="col-span-5 max-lg:col-span-full">
+      <ul class="flex flex-col" role="list">
+        {
+          items.map((item: HighlightItem, index: number) => (
+            <li
+              class:list={[
+                'flex gap-4 py-6',
+                index < items.length - 1 && 'border-b border-mid-gray-1/60',
+                index === 0 && 'pt-0',
+              ]}
+            >
+              {item.icon && (
+                <i
+                  class:list={[
+                    item.icon,
+                    'mt-0.5 size-6 shrink-0 text-[24px] leading-none',
+                    ICON_COLORS[index % ICON_COLORS.length],
+                  ]}
+                  aria-hidden="true"
+                />
+              )}
+              <div>
+                <h3 class="font-heading text-xl font-medium tracking-tight text-dark-gray max-md:text-lg">
+                  {item.title}
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-mid-gray-2">
+                  {item.body}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <Button href={CTA_HREF} label={buttonLabel} class="mt-8" />
+    </div>
+  </div>
+</section>

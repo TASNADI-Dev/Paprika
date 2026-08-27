@@ -13,7 +13,10 @@ export const aboutPage = defineType({
       name: 'sections',
       title: 'Sections',
       type: 'array',
-      of: [defineArrayMember({ type: 'aboutHeroSection' })],
+      of: [
+        defineArrayMember({ type: 'aboutHeroSection' }),
+        defineArrayMember({ type: 'aboutIntroSection' }),
+      ],
       description: 'Drag to reorder page sections.',
     }),
   ],
