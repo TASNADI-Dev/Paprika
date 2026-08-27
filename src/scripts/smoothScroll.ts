@@ -39,7 +39,11 @@ function samePageHash(href: string): string | null {
   try {
     const url = new URL(href, window.location.href);
     if (url.origin !== window.location.origin) return null;
-    if (url.pathname !== window.location.pathname) return null;
+
+    const normalize = (pathname: string) =>
+      pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+
+    if (normalize(url.pathname) !== normalize(window.location.pathname)) return null;
     return url.hash || null;
   } catch {
     return null;

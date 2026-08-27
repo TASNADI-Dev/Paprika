@@ -1,5 +1,6 @@
 ---
 import { asset } from '../../lib/assets';
+import { withBase } from '../../lib/paths';
 
 interface ContactItem {
   _key?: string;
@@ -81,7 +82,7 @@ const items = contactItems?.length ? contactItems : DEFAULT_CONTACT_ITEMS;
       class="flex items-start justify-between gap-10 max-lg:flex-col max-lg:gap-8"
     >
       <div class="max-w-md">
-        <a href="/" class="inline-block leading-none" aria-label="Paprika Advertising home">
+        <a href={withBase()} class="inline-block leading-none" aria-label="Paprika Advertising home">
           <img
             src={asset('/global/logo.webp')}
             alt="Paprika Advertising"
@@ -148,7 +149,7 @@ const items = contactItems?.length ? contactItems : DEFAULT_CONTACT_ITEMS;
           All rights reserved. © Copyright {year} Paprika Advertising
         </p>
         <a
-          href="/privacy-policy"
+          href={withBase('/privacy-policy')}
           class="underline underline-offset-2 transition-colors duration-300 hover:text-blue"
         >
           Privacy Policy

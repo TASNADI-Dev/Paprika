@@ -5,17 +5,18 @@ import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import { loadEnv } from 'vite';
 
-const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
-  process.env.NODE_ENV ?? 'development',
-  process.cwd(),
-  '',
-);
+const env = {
+  ...loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), ''),
+  ...process.env,
+};
 
-const projectId = PUBLIC_SANITY_PROJECT_ID || 'placeholder';
-const dataset = PUBLIC_SANITY_DATASET || 'production';
+const projectId = env.PUBLIC_SANITY_PROJECT_ID || 'placeholder';
+const dataset = env.PUBLIC_SANITY_DATASET || 'production';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://tasnadi-dev.github.io',
+  base: '/Paprika',
   vite: {
     plugins: [tailwindcss()],
   },

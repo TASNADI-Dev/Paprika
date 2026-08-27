@@ -1,6 +1,7 @@
 ---
 import Button from './Button.astro';
 import { asset } from '../lib/assets';
+import { withBase } from '../lib/paths';
 
 const links = [
   { label: 'Products', href: '#' },
@@ -16,7 +17,7 @@ const links = [
   <div
     class="mx-auto flex max-w-container items-center justify-between gap-4 px-[6vw] py-2.5 lg:gap-8"
   >
-    <a href="/" class="shrink-0 leading-none" aria-label="Paprika Advertising home">
+    <a href={withBase()} class="shrink-0 leading-none" aria-label="Paprika Advertising home">
       <img
         src={asset('/global/logo.webp')}
         alt="Paprika Advertising logo"
@@ -42,7 +43,7 @@ const links = [
         }
       </nav>
 
-      <Button href="/#quote" label="Request a Quote" />
+      <Button href={withBase('#quote')} label="Request a Quote" />
       <div class="hidden items-center gap-2 text-sm lg:flex" aria-label="Language">
         <a href="#" class="underline" hreflang="en" aria-current="true">EN</a>
         <a href="#" class="transition-colors duration-300 hover:text-blue" hreflang="fr">FR</a>
