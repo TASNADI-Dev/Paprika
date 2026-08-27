@@ -53,6 +53,11 @@ alwaysApply: true
 * **Modular Files:** Do **not** write monolithic `<script>` tags or massive single JS/TS files. Split logic into small, modular files organized logically in `src/scripts/` or alongside the component.
 * **Header Comment Required:** Every JS/TS file **must** start with a brief 1–2 line comment explaining its core purpose.
 
+## Live Site Reference
+
+* **Production website:** https://www.paprika-advertising.com/
+* Agents may fetch this URL (and its pages) as a visual/content reference for layout, copy, structure, and design decisions when implementing or updating the site.
+
 ## Documentation Context
 
 Consult these official Astro guides before generating complex logic:
