@@ -27,15 +27,21 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     // Pre-bundle Studio deps so Vite doesn't re-optimize mid-session
-    // (which causes 504 "Outdated Optimize Dep" during image uploads).
+    // (which causes 504 "Outdated Optimize Dep" and breaks /admin hydration).
     optimizeDeps: {
+      holdUntilCrawlEnd: true,
       include: [
         'react',
         'react-dom',
+        'react-dom/client',
         'react-is',
+        'react-compiler-runtime',
         'styled-components',
         'sanity',
         '@sanity/client',
+        '@sanity/ui',
+        'history',
+        'lodash/startCase.js',
       ],
     },
   },
@@ -46,6 +52,8 @@ export default defineConfig({
       apiVersion: '2026-03-01',
       useCdn: false,
       studioBasePath: '/admin',
+      // Hash routing avoids /admin/structure 404s on static dev and refresh.
+      studioRouterHistory: 'hash',
     }),
     react(),
   ],

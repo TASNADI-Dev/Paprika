@@ -1,12 +1,11 @@
 ---
-import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
 import AboutHero from '../components/AboutHero.astro';
 import AboutIntro from '../components/AboutIntro.astro';
 import AboutValues from '../components/AboutValues.astro';
-import { ABOUT_PAGE_QUERY } from '../lib/queries';
+import { fetchAboutPage } from '../lib/queries';
 
-const page = await sanityClient.fetch(ABOUT_PAGE_QUERY);
+const page = await fetchAboutPage('en');
 const sections = page?.sections ?? [];
 
 type PageSection = NonNullable<typeof sections>[number];
@@ -16,7 +15,7 @@ const PAGE_DESCRIPTION =
   'Paprika Advertising is a Budapest-based Franco-Hungarian company specializing in custom Point of Sale displays. Design, production, and partnership for retail brands.';
 ---
 
-<Layout title={PAGE_TITLE} description={PAGE_DESCRIPTION}>
+<Layout locale="en" title={PAGE_TITLE} description={PAGE_DESCRIPTION}>
   <main>
     {
       sections.length > 0 ? (

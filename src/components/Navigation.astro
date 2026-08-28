@@ -2,6 +2,13 @@
 import Button from './Button.astro';
 import { asset } from '../lib/assets';
 import { withBase } from '../lib/paths';
+import type { Locale } from '../lib/i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale: _locale = 'en' } = Astro.props;
 
 const links = [
   { label: 'Products', href: withBase('/products') },

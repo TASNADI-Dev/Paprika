@@ -3,19 +3,14 @@
  * Document title and SEO meta stay code-owned.
  */
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { getLocaleSubtitle, languageField } from '../objects/languageField';
 
 export const homePage = defineType({
   name: 'homePage',
   title: 'Home',
   type: 'document',
   fields: [
-    defineField({
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-      hidden: true,
-      initialValue: 'en',
-    }),
+    languageField,
     defineField({
       name: 'sections',
       title: 'Sections',
@@ -33,11 +28,11 @@ export const homePage = defineType({
     }),
   ],
   preview: {
-    select: { language: 'language' },
-    prepare({ language }) {
+    select: { language: 'language', id: '_id' },
+    prepare({ language, id }) {
       return {
         title: 'Home',
-        subtitle: language?.toUpperCase() || 'EN',
+        subtitle: getLocaleSubtitle(language, id),
       };
     },
   },

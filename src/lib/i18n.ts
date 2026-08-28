@@ -122,3 +122,27 @@ export function localizedPath(locale: Locale, path = '/'): string {
 export function switchLocalePath(currentPath: string, targetLocale: Locale): string {
   return localizedPath(targetLocale, getPathWithoutLocale(currentPath));
 }
+
+/** Builds an absolute alternate-locale URL for hreflang tags. */
+export function getAlternateHref(
+  site: URL | string,
+  currentPath: string,
+  targetLocale: Locale,
+): string {
+  return new URL(switchLocalePath(currentPath, targetLocale), site).href;
+}
+
+export type SanityPageKey = 'home' | 'about' | 'products' | 'privacy' | 'footer';
+
+const DOCUMENT_IDS: Record<SanityPageKey, Record<Locale, string>> = {
+  home: { en: 'home', fr: 'home-fr' },
+  about: { en: 'about', fr: 'about-fr' },
+  products: { en: 'products', fr: 'products-fr' },
+  privacy: { en: 'privacy', fr: 'privacy-fr' },
+  footer: { en: 'footer', fr: 'footer-fr' },
+};
+
+/** Maps a page key and locale to the fixed Sanity singleton document ID. */
+export function getDocumentId(page: SanityPageKey, locale: Locale): string {
+  return DOCUMENT_IDS[page][locale];
+}

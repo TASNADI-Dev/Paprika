@@ -3,19 +3,14 @@
  * Editors can change each category's description and images only.
  */
 import { defineField, defineType } from 'sanity';
+import { getLocaleSubtitle, languageField } from '../objects/languageField';
 
 export const productsPage = defineType({
   name: 'productsPage',
   title: 'Products',
   type: 'document',
   fields: [
-    defineField({
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-      hidden: true,
-      initialValue: 'en',
-    }),
+    languageField,
     defineField({
       name: 'floorStand',
       title: 'Floor Stand',
@@ -60,11 +55,11 @@ export const productsPage = defineType({
     }),
   ],
   preview: {
-    select: { language: 'language' },
-    prepare({ language }) {
+    select: { language: 'language', id: '_id' },
+    prepare({ language, id }) {
       return {
         title: 'Products',
-        subtitle: language?.toUpperCase() || 'EN',
+        subtitle: getLocaleSubtitle(language, id),
       };
     },
   },

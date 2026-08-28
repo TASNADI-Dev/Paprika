@@ -3,19 +3,14 @@
  * Logo, legal links, and social icons stay code-owned.
  */
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { getLocaleSubtitle, languageField } from '../objects/languageField';
 
 export const footer = defineType({
   name: 'footer',
   title: 'Footer',
   type: 'document',
   fields: [
-    defineField({
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-      hidden: true,
-      initialValue: 'en',
-    }),
+    languageField,
     defineField({
       name: 'slogan',
       title: 'Slogan',
@@ -68,11 +63,11 @@ export const footer = defineType({
     }),
   ],
   preview: {
-    select: { language: 'language' },
-    prepare({ language }) {
+    select: { language: 'language', id: '_id' },
+    prepare({ language, id }) {
       return {
         title: 'Footer',
-        subtitle: language?.toUpperCase() || 'EN',
+        subtitle: getLocaleSubtitle(language, id),
       };
     },
   },

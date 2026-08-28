@@ -1,17 +1,16 @@
 ---
-import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
 import ProductsTabs from '../components/ProductsTabs.astro';
-import { PRODUCTS_PAGE_QUERY } from '../lib/queries';
+import { fetchProductsPage } from '../lib/queries';
 
-const page = await sanityClient.fetch(PRODUCTS_PAGE_QUERY);
+const page = await fetchProductsPage('en');
 
 const PAGE_TITLE = 'Products | Paprika Advertising';
 const PAGE_DESCRIPTION =
   'Explore Paprika Advertising POS displays: floor stands, counters, shelf organizers, bus stop frames, cross-merch, testers, and eco solutions.';
 ---
 
-<Layout title={PAGE_TITLE} description={PAGE_DESCRIPTION}>
+<Layout locale="en" title={PAGE_TITLE} description={PAGE_DESCRIPTION}>
   <main>
     <ProductsTabs
       categories={

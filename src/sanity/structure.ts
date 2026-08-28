@@ -40,8 +40,7 @@ function createLocalizedSingleton(
               S.document()
                 .schemaType(schemaType)
                 .documentId(enId)
-                .title(`${title} (English)`)
-                .initialValue({ language: 'en' }),
+                .title(`${title} (English)`),
             ),
           S.listItem()
             .title('Français')
@@ -50,8 +49,7 @@ function createLocalizedSingleton(
               S.document()
                 .schemaType(schemaType)
                 .documentId(frId)
-                .title(`${title} (Français)`)
-                .initialValue({ language: 'fr' }),
+                .title(`${title} (Français)`),
             ),
         ]),
     );

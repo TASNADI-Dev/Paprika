@@ -2,22 +2,36 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { asset } from '../lib/assets';
-import { FOOTER_QUERY } from '../lib/queries';
-import { sanityClient } from 'sanity:client';
+import { fetchFooter } from '../lib/queries';
+import {
+  DEFAULT_LOCALE,
+  getAlternateHref,
+  getLocaleFromUrl,
+  LOCALES,
+  type Locale,
+} from '../lib/i18n';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  locale?: Locale;
 }
 
-const { title = 'Paprika', description } = Astro.props;
+const { title = 'Paprika', description, locale: localeProp } = Astro.props;
+const locale = localeProp ?? getLocaleFromUrl(Astro.url);
+const site = Astro.site ?? Astro.url;
+const footer = await fetchFooter(locale);
 
-const footer = await sanityClient.fetch(FOOTER_QUERY);
+const alternateLinks = LOCALES.map((alternateLocale) => ({
+  hreflang: alternateLocale,
+  href: getAlternateHref(site, Astro.url.pathname, alternateLocale),
+}));
+const defaultHref = getAlternateHref(site, Astro.url.pathname, DEFAULT_LOCALE);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href={asset('/global/favicon.png')} />
@@ -32,12 +46,18 @@ const footer = await sanityClient.fetch(FOOTER_QUERY);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
+    {
+      alternateLinks.map(({ hreflang, href }) => (
+        <link rel="alternate" hreflang={hreflang} href={href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={defaultHref} />
     <title>{title}</title>
   </head>
   <body class="bg-light-gray font-sans text-dark-gray antialiased">
-    <Navigation />
+    <Navigation locale={locale} />
     <slot />
-    <Footer slogan={footer?.slogan} contactItems={footer?.contactItems} />
+    <Footer locale={locale} slogan={footer?.slogan} contactItems={footer?.contactItems} />
     <script>
       import '../scripts/smoothScroll.ts';
       import '../scripts/staggerChildren.ts';

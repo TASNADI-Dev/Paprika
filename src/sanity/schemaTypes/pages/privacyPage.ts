@@ -3,19 +3,14 @@
  * SEO meta stays code-owned.
  */
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { getLocaleSubtitle, languageField } from '../objects/languageField';
 
 export const privacyPage = defineType({
   name: 'privacyPage',
   title: 'Privacy Policy',
   type: 'document',
   fields: [
-    defineField({
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-      hidden: true,
-      initialValue: 'en',
-    }),
+    languageField,
     defineField({
       name: 'title',
       title: 'Title',
@@ -68,11 +63,11 @@ export const privacyPage = defineType({
     }),
   ],
   preview: {
-    select: { language: 'language' },
-    prepare({ language }) {
+    select: { language: 'language', id: '_id' },
+    prepare({ language, id }) {
       return {
         title: 'Privacy Policy',
-        subtitle: language?.toUpperCase() || 'EN',
+        subtitle: getLocaleSubtitle(language, id),
       };
     },
   },
