@@ -35,17 +35,18 @@ const imageAlt = image?.alt || 'Sustainable POS display';
 
 <section class="bg-[var(--color-green)] text-white" aria-label="Eco">
   <div
-    class="mx-auto grid max-w-container grid-cols-12 items-start gap-16 px-[6vw] py-24 max-lg:gap-10 max-md:gap-10 max-md:py-16" data-stagger-children
+    class="mx-auto grid max-w-container grid-cols-12 items-start gap-16 px-[6vw] py-24 max-lg:grid-cols-1 max-lg:gap-12 max-md:gap-10 max-md:py-16"
+    data-stagger-children
   >
     {
       imageSrc && (
-        <figure class="col-span-3 overflow-hidden rounded-2xl bg-white shadow-lg max-md:order-2 max-md:col-span-4">
+        <figure class="col-span-3 min-w-0 overflow-hidden rounded-2xl bg-white shadow-lg max-lg:order-2 max-lg:col-span-full">
           <img
             src={imageSrc}
             alt={imageAlt}
             width="800"
             height="1200"
-            class="w-full object-cover object-top max-md:max-h-[70vh]"
+            class="w-full max-w-full object-cover object-top max-lg:max-h-[70vh]"
             loading="lazy"
             decoding="async"
           />
@@ -55,7 +56,7 @@ const imageAlt = image?.alt || 'Sustainable POS display';
 
     <div
       class:list={[
-        'col-span-9 max-md:order-1 max-md:col-span-full',
+        'col-span-9 min-w-0 max-lg:order-1 max-lg:col-span-full',
         !imageSrc && 'col-span-full',
       ]}
     >
