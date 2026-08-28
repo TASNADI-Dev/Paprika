@@ -10,6 +10,13 @@ export const privacyPage = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+      initialValue: 'en',
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
@@ -61,8 +68,12 @@ export const privacyPage = defineType({
     }),
   ],
   preview: {
-    prepare() {
-      return { title: 'Privacy Policy' };
+    select: { language: 'language' },
+    prepare({ language }) {
+      return {
+        title: 'Privacy Policy',
+        subtitle: language?.toUpperCase() || 'EN',
+      };
     },
   },
 });

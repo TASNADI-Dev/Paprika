@@ -10,6 +10,13 @@ export const productsPage = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+      initialValue: 'en',
+    }),
+    defineField({
       name: 'floorStand',
       title: 'Floor Stand',
       type: 'productCategory',
@@ -53,8 +60,12 @@ export const productsPage = defineType({
     }),
   ],
   preview: {
-    prepare() {
-      return { title: 'Products' };
+    select: { language: 'language' },
+    prepare({ language }) {
+      return {
+        title: 'Products',
+        subtitle: language?.toUpperCase() || 'EN',
+      };
     },
   },
 });

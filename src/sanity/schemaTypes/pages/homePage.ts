@@ -10,6 +10,13 @@ export const homePage = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+      initialValue: 'en',
+    }),
+    defineField({
       name: 'sections',
       title: 'Sections',
       type: 'array',
@@ -26,8 +33,12 @@ export const homePage = defineType({
     }),
   ],
   preview: {
-    prepare() {
-      return { title: 'Home' };
+    select: { language: 'language' },
+    prepare({ language }) {
+      return {
+        title: 'Home',
+        subtitle: language?.toUpperCase() || 'EN',
+      };
     },
   },
 });

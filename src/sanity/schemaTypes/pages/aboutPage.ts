@@ -10,6 +10,13 @@ export const aboutPage = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+      initialValue: 'en',
+    }),
+    defineField({
       name: 'sections',
       title: 'Sections',
       type: 'array',
@@ -22,8 +29,12 @@ export const aboutPage = defineType({
     }),
   ],
   preview: {
-    prepare() {
-      return { title: 'About' };
+    select: { language: 'language' },
+    prepare({ language }) {
+      return {
+        title: 'About',
+        subtitle: language?.toUpperCase() || 'EN',
+      };
     },
   },
 });

@@ -10,6 +10,13 @@ export const footer = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+      initialValue: 'en',
+    }),
+    defineField({
       name: 'slogan',
       title: 'Slogan',
       type: 'text',
@@ -61,8 +68,12 @@ export const footer = defineType({
     }),
   ],
   preview: {
-    prepare() {
-      return { title: 'Footer' };
+    select: { language: 'language' },
+    prepare({ language }) {
+      return {
+        title: 'Footer',
+        subtitle: language?.toUpperCase() || 'EN',
+      };
     },
   },
 });
