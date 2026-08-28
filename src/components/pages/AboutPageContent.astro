@@ -1,0 +1,61 @@
+---
+/** Shared about page sections — fetches locale-aware Sanity data and renders section blocks. */
+import AboutHero from '../AboutHero.astro';
+import AboutIntro from '../AboutIntro.astro';
+import AboutValues from '../AboutValues.astro';
+import { fetchAboutPage } from '../../lib/queries';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = await fetchAboutPage(locale);
+const sections = page?.sections ?? [];
+
+type PageSection = NonNullable<typeof sections>[number];
+---
+
+<main>
+  {
+    sections.length > 0 ? (
+      sections.map((section: PageSection) => {
+        switch (section._type) {
+          case 'aboutHeroSection':
+            return (
+              <AboutHero
+                headline={section.headline}
+                body={section.body}
+                image={section.image}
+              />
+            );
+          case 'aboutIntroSection':
+            return (
+              <AboutIntro
+                body={section.body}
+                highlights={section.highlights}
+                ctaLabel={section.ctaLabel}
+              />
+            );
+          case 'aboutValuesSection':
+            return (
+              <AboutValues
+                headline={section.headline}
+                body={section.body}
+                values={section.values}
+              />
+            );
+          default:
+            return null;
+        }
+      })
+    ) : (
+      <>
+        <AboutHero />
+        <AboutIntro />
+        <AboutValues />
+      </>
+    )
+  }
+</main>

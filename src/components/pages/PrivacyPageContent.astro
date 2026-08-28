@@ -1,0 +1,39 @@
+---
+/** Shared privacy policy page — fetches locale-aware Sanity data and renders article body. */
+import PrivacyBody from '../PrivacyBody.astro';
+import { fetchPrivacyPage } from '../../lib/queries';
+import { t, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = await fetchPrivacyPage(locale);
+
+const title = page?.title || t(locale, 'meta.privacy.fallbackTitle');
+const body = page?.body ?? null;
+---
+
+<main class="bg-white">
+  <div class="mx-auto max-w-container px-[6vw] py-24 max-md:py-16">
+    <article class="max-w-[680px] text-left">
+      <h1
+        class="font-heading text-[5rem] font-medium tracking-tight text-dark-gray max-lg:text-4xl max-md:text-[3rem]"
+      >
+        {title}
+      </h1>
+      {
+        body ? (
+          <div class="mt-10">
+            <PrivacyBody value={body} />
+          </div>
+        ) : (
+          <p class="mt-10 text-base leading-relaxed text-mid-gray-2">
+            {t(locale, 'meta.privacy.emptyBody')}
+          </p>
+        )
+      }
+    </article>
+  </div>
+</main>

@@ -1,76 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import Eco from '../components/Eco.astro';
-import Quote from '../components/Quote.astro';
-import Support from '../components/Support.astro';
-import { fetchHomePage } from '../lib/queries';
+import HomePageContent from '../components/pages/HomePageContent.astro';
+import { t, type Locale } from '../lib/i18n';
 
-const page = await fetchHomePage('en');
-const sections = page?.sections ?? [];
-
-type PageSection = NonNullable<typeof sections>[number];
-
-const PAGE_TITLE = 'Paprika | Paprika Advertising';
-const PAGE_DESCRIPTION =
-  'French-Hungarian POS advertising agency based in Budapest. Custom point-of-sale displays, sustainable materials, and full-service design and production.';
+const locale: Locale = 'en';
 ---
 
-<Layout locale="en" title={PAGE_TITLE} description={PAGE_DESCRIPTION}>
-  <main>
-    {
-      sections.length > 0 ? (
-        sections.map((section: PageSection) => {
-          switch (section._type) {
-            case 'heroSection':
-              return (
-                <Hero
-                  headline={section.headline}
-                  body={section.body}
-                  ctaLabel={section.ctaLabel}
-                  image={section.image}
-                />
-              );
-            case 'servicesSection':
-              return (
-                <Services
-                  headline={section.headline}
-                  body={section.body}
-                  services={section.services}
-                />
-              );
-            case 'ecoSection':
-              return (
-                <Eco
-                  headline={section.headline}
-                  body={section.body}
-                  image={section.image}
-                />
-              );
-            case 'quoteSection':
-              return (
-                <Quote
-                  headline={section.headline}
-                  body={section.body}
-                  contactInfo={section.contactInfo}
-                />
-              );
-            case 'supportSection':
-              return <Support />;
-            default:
-              return null;
-          }
-        })
-      ) : (
-        <>
-          <Hero />
-          <Services />
-          <Eco />
-          <Quote />
-          <Support />
-        </>
-      )
-    }
-  </main>
+<Layout
+  locale={locale}
+  title={t(locale, 'meta.home.title')}
+  description={t(locale, 'meta.home.description')}
+>
+  <HomePageContent locale={locale} />
 </Layout>

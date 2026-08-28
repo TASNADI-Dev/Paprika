@@ -1,0 +1,76 @@
+---
+/** Shared home page sections — fetches locale-aware Sanity data and renders section blocks. */
+import Hero from '../Hero.astro';
+import Services from '../Services.astro';
+import Eco from '../Eco.astro';
+import Quote from '../Quote.astro';
+import Support from '../Support.astro';
+import { fetchHomePage } from '../../lib/queries';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = await fetchHomePage(locale);
+const sections = page?.sections ?? [];
+
+type PageSection = NonNullable<typeof sections>[number];
+---
+
+<main>
+  {
+    sections.length > 0 ? (
+      sections.map((section: PageSection) => {
+        switch (section._type) {
+          case 'heroSection':
+            return (
+              <Hero
+                headline={section.headline}
+                body={section.body}
+                ctaLabel={section.ctaLabel}
+                image={section.image}
+              />
+            );
+          case 'servicesSection':
+            return (
+              <Services
+                headline={section.headline}
+                body={section.body}
+                services={section.services}
+              />
+            );
+          case 'ecoSection':
+            return (
+              <Eco
+                headline={section.headline}
+                body={section.body}
+                image={section.image}
+              />
+            );
+          case 'quoteSection':
+            return (
+              <Quote
+                headline={section.headline}
+                body={section.body}
+                contactInfo={section.contactInfo}
+              />
+            );
+          case 'supportSection':
+            return <Support />;
+          default:
+            return null;
+        }
+      })
+    ) : (
+      <>
+        <Hero />
+        <Services />
+        <Eco />
+        <Quote />
+        <Support />
+      </>
+    )
+  }
+</main>

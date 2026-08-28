@@ -1,31 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ProductsTabs from '../components/ProductsTabs.astro';
-import { fetchProductsPage } from '../lib/queries';
+import ProductsPageContent from '../components/pages/ProductsPageContent.astro';
+import { t, type Locale } from '../lib/i18n';
 
-const page = await fetchProductsPage('en');
-
-const PAGE_TITLE = 'Products | Paprika Advertising';
-const PAGE_DESCRIPTION =
-  'Explore Paprika Advertising POS displays: floor stands, counters, shelf organizers, bus stop frames, cross-merch, testers, and eco solutions.';
+const locale: Locale = 'en';
 ---
 
-<Layout locale="en" title={PAGE_TITLE} description={PAGE_DESCRIPTION}>
-  <main>
-    <ProductsTabs
-      categories={
-        page
-          ? {
-              floorStand: page.floorStand,
-              counter: page.counter,
-              shelfOrganizer: page.shelfOrganizer,
-              busStopFrame: page.busStopFrame,
-              crossMerch: page.crossMerch,
-              testerGlorifier: page.testerGlorifier,
-              eco: page.eco,
-            }
-          : null
-      }
-    />
-  </main>
+<Layout
+  locale={locale}
+  title={t(locale, 'meta.products.title')}
+  description={t(locale, 'meta.products.description')}
+>
+  <ProductsPageContent locale={locale} />
 </Layout>

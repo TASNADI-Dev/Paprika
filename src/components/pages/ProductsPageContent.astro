@@ -1,0 +1,31 @@
+---
+/** Shared products page — fetches locale-aware Sanity data and renders product tabs. */
+import ProductsTabs from '../ProductsTabs.astro';
+import { fetchProductsPage } from '../../lib/queries';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = await fetchProductsPage(locale);
+---
+
+<main>
+  <ProductsTabs
+    categories={
+      page
+        ? {
+            floorStand: page.floorStand,
+            counter: page.counter,
+            shelfOrganizer: page.shelfOrganizer,
+            busStopFrame: page.busStopFrame,
+            crossMerch: page.crossMerch,
+            testerGlorifier: page.testerGlorifier,
+            eco: page.eco,
+          }
+        : null
+    }
+  />
+</main>
