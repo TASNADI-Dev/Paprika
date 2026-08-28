@@ -26,6 +26,7 @@ alwaysApply: true
     * `#292825` Dark Gray
     * `#33333d` Mid Dark
 * **Typography:** Reference the custom fonts located in the `/public/fonts/` (or `/src/fonts/`) folder. Define these in the Tailwind config as primary font families (e.g., `font-sans`, `font-heading`).
+* **Units:** Do not use `px` for font sizes — use `rem` instead. When the user specifies a value in `px`, always convert it to `rem` first (16px = 1rem) before applying it in code. **Exception:** border radius values may use `px`.
 * **Container:** The max width of the content should be 1440px.
 
 ## Assets
