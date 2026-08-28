@@ -1,6 +1,7 @@
 ---
 import Button from './Button.astro';
 import { asset } from '../lib/assets';
+import { t, type Locale } from '../lib/i18n';
 import { urlFor } from '../lib/sanityImage';
 
 interface HeroImage {
@@ -11,6 +12,7 @@ interface HeroImage {
 }
 
 interface Props {
+  locale?: Locale;
   headline?: string | null;
   body?: string | null;
   ctaLabel?: string | null;
@@ -20,25 +22,25 @@ interface Props {
 const CTA_HREF = '#quote';
 
 const {
-  headline = 'Paprika Advertising',
-  body = 'Paprika Advertising is a French-Hungarian POS Advertising agency',
-  ctaLabel = 'Request a Quote',
+  locale = 'en',
+  headline,
+  body,
+  ctaLabel,
   image,
 } = Astro.props;
 
 const imageSrc = image?.asset
   ? urlFor(image).width(2400).quality(80).auto('format').url()
   : asset('/counter-display/1-03.webp');
-const imageAlt = image?.alt || 'Philips Baristina point-of-sale display';
-const title = headline || 'Paprika Advertising';
-const description =
-  body || 'Paprika Advertising is a French-Hungarian POS Advertising agency';
-const buttonLabel = ctaLabel || 'Request a Quote';
+const imageAlt = image?.alt || t(locale, 'hero.imageAlt');
+const title = headline || t(locale, 'hero.headline');
+const description = body || t(locale, 'hero.body');
+const buttonLabel = ctaLabel || t(locale, 'hero.ctaLabel');
 ---
 
 <section
   class="relative flex min-h-[calc(100svh-var(--nav-height))] items-center justify-center overflow-hidden"
-  aria-label="Hero"
+  aria-label={t(locale, 'hero.ariaLabel')}
 >
   <img
     src={imageSrc}

@@ -27,6 +27,7 @@ type PageSection = NonNullable<typeof sections>[number];
           case 'heroSection':
             return (
               <Hero
+                locale={locale}
                 headline={section.headline}
                 body={section.body}
                 ctaLabel={section.ctaLabel}
@@ -52,24 +53,25 @@ type PageSection = NonNullable<typeof sections>[number];
           case 'quoteSection':
             return (
               <Quote
+                locale={locale}
                 headline={section.headline}
                 body={section.body}
                 contactInfo={section.contactInfo}
               />
             );
           case 'supportSection':
-            return <Support />;
+            return <Support locale={locale} />;
           default:
             return null;
         }
       })
     ) : (
       <>
-        <Hero />
+        <Hero locale={locale} />
         <Services />
         <Eco />
-        <Quote />
-        <Support />
+        <Quote locale={locale} />
+        <Support locale={locale} />
       </>
     )
   }

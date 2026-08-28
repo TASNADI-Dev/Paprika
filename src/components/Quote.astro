@@ -1,6 +1,6 @@
 ---
 import { asset } from '../lib/assets';
-import { withBase } from '../lib/paths';
+import { localizedPath, t, type Locale } from '../lib/i18n';
 
 interface ContactItem {
   _key?: string;
@@ -16,12 +16,14 @@ interface ContactInfo {
 }
 
 interface Props {
+  locale?: Locale;
   headline?: string | null;
   body?: string | null;
   contactInfo?: ContactInfo | null;
 }
 
 const ICON_COLORS = ['text-blue', 'text-red', 'text-green'] as const;
+const CONSENT_MARKER = '«PRIVACY»';
 
 const DEFAULT_CONTACT_ITEMS: ContactItem[] = [
   {
@@ -45,23 +47,27 @@ const DEFAULT_CONTACT_ITEMS: ContactItem[] = [
 ];
 
 const {
-  headline = 'Request a Quote',
-  body = 'Please feel free to get in touch anytime, we will reply shortly.',
+  locale = 'en',
+  headline,
+  body,
   contactInfo,
 } = Astro.props;
 
-const title = headline || 'Request a Quote';
-const description =
-  body || 'Please feel free to get in touch anytime, we will reply shortly.';
-const contactTitle = contactInfo?.title || 'Contact Info';
-const companyName = contactInfo?.companyName || 'Paprika Advertising Kft.';
+const privacyHref = localizedPath(locale, '/privacy-policy');
+const privacyLabel = t(locale, 'quote.privacyLink');
+const consentParts = t(locale, 'quote.consent', { privacyLink: CONSENT_MARKER }).split(CONSENT_MARKER);
+
+const title = headline || t(locale, 'quote.headline');
+const description = body || t(locale, 'quote.body');
+const contactTitle = contactInfo?.title || t(locale, 'quote.contactTitle');
+const companyName = contactInfo?.companyName || t(locale, 'quote.companyName');
 const contactItems = contactInfo?.items?.length
   ? contactInfo.items
   : DEFAULT_CONTACT_ITEMS;
 const dividerSrc = asset('/global/custom-divider.svg');
 ---
 
-<section id="quote" class="bg-white" aria-label="Request a Quote">
+<section id="quote" class="bg-white" aria-label={t(locale, 'quote.ariaLabel')}>
   <div class="mx-auto max-w-container px-[6vw] py-24 max-md:py-16">
     <div class="mx-auto flex max-w-3xl flex-col items-center gap-2 text-center">
       <img
@@ -96,57 +102,65 @@ const dividerSrc = asset('/global/custom-divider.svg');
           method="POST"
           class="flex flex-col gap-5"
         >
-          <input type="hidden" name="_subject" value="Paprika quote request" />
+          <input type="hidden" name="_subject" value={t(locale, 'quote.formSubject')} />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
 
           <div class="flex flex-col gap-2">
-            <label for="quote-name" class="text-sm font-medium">Name*</label>
+            <label for="quote-name" class="text-sm font-medium">
+              {t(locale, 'quote.fields.name')}
+            </label>
             <input
               id="quote-name"
               name="name"
               type="text"
               required
               maxlength="256"
-              placeholder="e.g. John Doe"
+              placeholder={t(locale, 'quote.fields.namePlaceholder')}
               class="w-full rounded-[0.7rem] border border-mid-gray-1 bg-blue/40 px-4 py-3 text-base text-white placeholder:text-white/50 outline-none transition-colors focus:border-mid-gray-1"
             />
           </div>
 
           <div class="flex flex-col gap-2">
-            <label for="quote-email" class="text-sm font-medium">Email*</label>
+            <label for="quote-email" class="text-sm font-medium">
+              {t(locale, 'quote.fields.email')}
+            </label>
             <input
               id="quote-email"
               name="email"
               type="email"
               required
               maxlength="256"
-              placeholder="e.g. jdoe@email.com"
+              placeholder={t(locale, 'quote.fields.emailPlaceholder')}
               class="w-full rounded-[0.7rem] border border-mid-gray-1 bg-blue/40 px-4 py-3 text-base text-white placeholder:text-white/50 outline-none transition-colors focus:border-mid-gray-1"
             />
           </div>
 
           <div class="flex flex-col gap-2">
-            <label for="quote-subject" class="text-sm font-medium">Subject*</label>
+            <label for="quote-subject" class="text-sm font-medium">
+              {t(locale, 'quote.fields.subject')}
+            </label>
             <input
               id="quote-subject"
               name="subject"
               type="text"
               required
               maxlength="256"
-              placeholder="e.g. Getting a quote"
+              placeholder={t(locale, 'quote.fields.subjectPlaceholder')}
               class="w-full rounded-[0.7rem] border border-mid-gray-1 bg-blue/40 px-4 py-3 text-base text-white placeholder:text-white/50 outline-none transition-colors focus:border-mid-gray-1"
             />
           </div>
 
           <div class="flex flex-col gap-2">
-            <label for="quote-message" class="text-sm font-medium">Message</label>
+            <label for="quote-message" class="text-sm font-medium">
+              {t(locale, 'quote.fields.message')}
+            </label>
             <textarea
               id="quote-message"
               name="message"
               rows="5"
               maxlength="5000"
-              placeholder="Leave us a message..."
+              placeholder={t(locale, 'quote.fields.messagePlaceholder')}
               class="w-full resize-y rounded-[0.7rem] border border-mid-gray-1 bg-blue/40 px-4 py-3 text-base text-white placeholder:text-white/50 outline-none transition-colors focus:border-mid-gray-1"
             ></textarea>
           </div>
@@ -160,10 +174,9 @@ const dividerSrc = asset('/global/custom-divider.svg');
               class="quote-consent-checkbox mt-1 size-5 shrink-0 appearance-none rounded border border-mid-gray-1 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mid-gray-1"
             />
             <span>
-              I have read and agree to the{' '}
-              <a href={withBase('/privacy-policy')} class="underline underline-offset-2"
-                >Privacy Policy</a
-              >, and I consent to the storage and processing of my personal data.*
+              {consentParts[0]}
+              <a href={privacyHref} class="underline underline-offset-2">{privacyLabel}</a>
+              {consentParts[1] ?? ''}
             </span>
           </label>
 
@@ -173,7 +186,7 @@ const dividerSrc = asset('/global/custom-divider.svg');
             class="text-sm text-white"
             role="alert"
           >
-            Oops! Something went wrong while submitting the form.
+            {t(locale, 'quote.error')}
           </p>
 
           <div class="mt-2 flex items-end justify-between gap-4 max-sm:flex-col max-sm:items-stretch">
@@ -181,9 +194,9 @@ const dividerSrc = asset('/global/custom-divider.svg');
               type="submit"
               class="inline-flex items-center justify-center rounded-[0.7rem] bg-white px-[1em] py-[0.7em] text-base text-dark-gray transition-colors duration-300 hover:bg-light-gray disabled:cursor-not-allowed disabled:opacity-70 max-sm:w-full"
             >
-              Submit
+              {t(locale, 'quote.submit')}
             </button>
-            <p class="text-sm text-white/70 max-sm:text-right">*Required</p>
+            <p class="text-sm text-white/70 max-sm:text-right">{t(locale, 'quote.required')}</p>
           </div>
         </form>
 
@@ -198,14 +211,14 @@ const dividerSrc = asset('/global/custom-divider.svg');
           <p
             class="text-center font-heading text-[2rem] font-medium leading-tight tracking-tight"
           >
-            Thank you for your submission!
+            {t(locale, 'quote.success')}
           </p>
         </div>
       </div>
 
       <aside
         class="col-span-6 rounded-[0.7rem] border border-mid-gray-1 bg-white p-8 max-lg:col-span-full max-md:p-6"
-        aria-label="Contact Info"
+        aria-label={t(locale, 'quote.contactTitle')}
       >
         <h3 class="font-heading text-[1.5rem] font-medium tracking-tight text-dark-gray">
           {contactTitle}

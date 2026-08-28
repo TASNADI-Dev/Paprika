@@ -25,6 +25,7 @@ type PageSection = NonNullable<typeof sections>[number];
           case 'aboutHeroSection':
             return (
               <AboutHero
+                locale={locale}
                 headline={section.headline}
                 body={section.body}
                 image={section.image}
@@ -33,6 +34,7 @@ type PageSection = NonNullable<typeof sections>[number];
           case 'aboutIntroSection':
             return (
               <AboutIntro
+                locale={locale}
                 body={section.body}
                 highlights={section.highlights}
                 ctaLabel={section.ctaLabel}
@@ -52,8 +54,8 @@ type PageSection = NonNullable<typeof sections>[number];
       })
     ) : (
       <>
-        <AboutHero />
-        <AboutIntro />
+        <AboutHero locale={locale} />
+        <AboutIntro locale={locale} />
         <AboutValues />
       </>
     )

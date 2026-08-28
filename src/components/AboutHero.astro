@@ -1,4 +1,5 @@
 ---
+import { t, type Locale } from '../lib/i18n';
 import { urlFor } from '../lib/sanityImage';
 
 interface HeroImage {
@@ -9,28 +10,25 @@ interface HeroImage {
 }
 
 interface Props {
+  locale?: Locale;
   headline?: string | null;
   body?: string | null;
   image?: HeroImage | null;
 }
 
-const {
-  headline = 'About Us',
-  body = 'A creative agency that lead and inspire',
-  image,
-} = Astro.props;
+const { locale = 'en', headline, body, image } = Astro.props;
 
 const imageSrc = image?.asset
   ? urlFor(image).width(2400).quality(80).auto('format').url()
   : null;
-const imageAlt = image?.alt || 'Paprika Advertising team at work';
-const title = headline || 'About Us';
-const description = body || 'A creative agency that lead and inspire';
+const imageAlt = image?.alt || t(locale, 'aboutHero.imageAlt');
+const title = headline || t(locale, 'aboutHero.headline');
+const description = body || t(locale, 'aboutHero.body');
 ---
 
 <section
   class="relative flex min-h-[min(52svh,28rem)] items-center overflow-hidden bg-mid-dark"
-  aria-label="About hero"
+  aria-label={t(locale, 'aboutHero.ariaLabel')}
 >
   {
     imageSrc && (

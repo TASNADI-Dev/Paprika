@@ -1,6 +1,6 @@
 ---
 import Button from './Button.astro';
-import { withBase } from '../lib/paths';
+import { localizedPath, t, type Locale } from '../lib/i18n';
 
 interface HighlightItem {
   _key?: string;
@@ -10,57 +10,50 @@ interface HighlightItem {
 }
 
 interface Props {
+  locale?: Locale;
   body?: string | null;
   highlights?: HighlightItem[] | null;
   ctaLabel?: string | null;
 }
 
-const CTA_HREF = withBase('#quote');
-
 const ICON_COLORS = ['text-blue', 'text-red', 'text-green'] as const;
 
-const DEFAULT_BODY = [
-  'Paprika Advertising is a Budapest-based Franco-Hungarian company specializing in the design and production of custom Point of Sale (POS) displays. For over 25 years, we have been crafting in-store solutions that elevate brand and product visibility across retail environments.',
-  'Our in-house team manages every project end-to-end, from initial design through to final production. Manufacturing takes place in our own specialized workshop and through an established international partner network. We work with cardboard, plastic, metal, wood, and textiles, tailoring every display to the exact specifications of the project.',
-  'Our focus is rooted in reliability, flawless execution, and building lasting client relationships. The vast majority of our production is delivered to Western Europe, with a primary focus on the French market.',
-].join('\n\n');
+const { locale = 'en', body, highlights, ctaLabel } = Astro.props;
 
-const DEFAULT_HIGHLIGHTS: HighlightItem[] = [
+const quoteHref = `${localizedPath(locale, '/')}#quote`;
+
+const defaultHighlights = (): HighlightItem[] => [
   {
     _key: 'experience',
     icon: 'ph-fill ph-circle',
-    title: '35+ Years of Experience',
-    body: 'Design and manufacturing of bespoke POS solutions for international partners.',
+    title: t(locale, 'aboutIntro.highlights.experience.title'),
+    body: t(locale, 'aboutIntro.highlights.experience.body'),
   },
   {
     _key: 'execution',
     icon: 'ph-fill ph-circle',
-    title: 'End-to-End Execution',
-    body: 'Design, prototyping, production, and logistics—all handled under one roof.',
+    title: t(locale, 'aboutIntro.highlights.execution.title'),
+    body: t(locale, 'aboutIntro.highlights.execution.body'),
   },
   {
     _key: 'export',
     icon: 'ph-fill ph-circle',
-    title: '98% Export Rate',
-    body: 'The vast majority of our production is exported to Western Europe, primarily France and Germany.',
+    title: t(locale, 'aboutIntro.highlights.export.title'),
+    body: t(locale, 'aboutIntro.highlights.export.body'),
   },
 ];
 
-const {
-  body = DEFAULT_BODY,
-  highlights,
-  ctaLabel = 'Request a Quote',
-} = Astro.props;
+const defaultBody = t(locale, 'aboutIntro.body');
 
-const paragraphs = (body || DEFAULT_BODY)
+const paragraphs = (body || defaultBody)
   .split(/\n\s*\n/)
   .map((p: string) => p.trim())
   .filter(Boolean);
-const items = highlights?.length ? highlights : DEFAULT_HIGHLIGHTS;
-const buttonLabel = ctaLabel || 'Request a Quote';
+const items = highlights?.length ? highlights : defaultHighlights();
+const buttonLabel = ctaLabel || t(locale, 'aboutIntro.ctaLabel');
 ---
 
-<section class="bg-light-gray" aria-label="About intro">
+<section class="bg-light-gray" aria-label={t(locale, 'aboutIntro.ariaLabel')}>
   <div
     class="mx-auto grid max-w-container grid-cols-12 items-start gap-16 px-[6vw] py-24 max-lg:grid-cols-1 max-lg:gap-12 max-md:gap-10 max-md:py-16"
     data-stagger-children
@@ -103,7 +96,7 @@ const buttonLabel = ctaLabel || 'Request a Quote';
         }
       </ul>
 
-      <Button href={CTA_HREF} label={buttonLabel} class="mt-8" />
+      <Button href={quoteHref} label={buttonLabel} class="mt-8" />
     </div>
   </div>
 </section>

@@ -1,6 +1,11 @@
 ---
 import { asset } from '../lib/assets';
-import { PRODUCT_TABS, type ProductTabField } from '../lib/productTabs';
+import {
+  getProductTabDefaultBody,
+  getProductTabs,
+  type ProductTabField,
+} from '../lib/productTabs';
+import { t, type Locale } from '../lib/i18n';
 import { urlFor } from '../lib/sanityImage';
 
 interface CategoryImage {
@@ -19,40 +24,24 @@ interface CategoryContent {
 type Categories = Partial<Record<ProductTabField, CategoryContent | null>>;
 
 interface Props {
+  locale?: Locale;
   categories?: Categories | null;
 }
 
-const DEFAULT_BODIES: Record<ProductTabField, string> = {
-  floorStand:
-    'A floor stand, or freestanding display unit (FSDU), is one of the most effective point-of-sale marketing tools. Positioned in high-traffic areas of the store, it elevates products off the standard shelf, maximizes visibility, and drives impulse purchases. Custom-designed in shape and dimensions, it aligns seamlessly with brand identity and promotional campaigns.',
-  counter:
-    'A counter display (CDU) is a compact marketing solution designed for checkout areas, retail counters, and store shelves. Ideal for showcasing smaller products, new arrivals, or promotional offers, it captures attention directly at the point of purchase, significantly boosting impulse sales.',
-  shelfOrganizer:
-    'A shelf organizer structures store shelves and highlights featured products. It brings clarity to product ranges, guides shopper focus, and ensures a clean, consistent brand presentation on-shelf—making it a powerful tool for brand building and strengthening shelf presence.',
-  busStopFrame:
-    'The Bus Stop Frame is a large-format framed display unit designed for endcaps and high-visibility retail locations. It ensures promotions and campaigns are clearly visible from a distance, effectively steering shopper footfall toward specific product categories.',
-  crossMerch:
-    'A cross-merchandiser is a display solution engineered to showcase complementary products side by side. It encourages cross-selling, increases basket size, and makes it effortless for shoppers to pick up related items—such as pairing soft drinks with snacks.',
-  testerGlorifier:
-    'Tester and glorifier displays are designed to spotlight premium products and elevate the overall in-store experience. Testers invite shoppers to try and interact with the product, while glorifiers deliver an exclusive presentation that underscores luxury and quality. They are especially popular in cosmetics, beauty, spirits, and premium FMCG sectors.',
-  eco:
-    'The Eco category features point-of-sale displays crafted from eco-friendly, sustainable materials. Built using recycled or fully recyclable components, these solutions deliver high-impact brand communication without compromising environmental responsibility—making them the ideal choice for companies prioritizing sustainability.',
-};
-
-const { categories } = Astro.props;
+const { locale = 'en', categories } = Astro.props;
 const dividerSrc = asset('/global/custom-divider.svg');
 
-const tabs = PRODUCT_TABS.map((tab) => {
+const tabs = getProductTabs(locale).map((tab) => {
   const content = categories?.[tab.field];
   return {
     ...tab,
-    body: content?.body?.trim() || DEFAULT_BODIES[tab.field],
+    body: content?.body?.trim() || getProductTabDefaultBody(locale, tab.field),
     images: (content?.images ?? []).filter((image) => image?.asset),
   };
 });
 ---
 
-<section class="bg-white" aria-label="Products" data-products-tabs>
+<section class="bg-white" aria-label={t(locale, 'products.title')} data-products-tabs>
   <div class="mx-auto max-w-container px-[6vw] pb-24 pt-16 max-md:pb-16 max-md:pt-12" data-stagger-children>
     <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
       <img
@@ -67,13 +56,15 @@ const tabs = PRODUCT_TABS.map((tab) => {
       <h1
         class="font-heading text-[3.75rem] font-medium leading-[1.2] tracking-tight text-dark-gray max-md:text-[3rem]"
       >
-        Products
+        {t(locale, 'products.title')}
       </h1>
     </div>
 
     <div class="mt-10 products-tabs:mt-12">
       <div class="relative products-tabs:hidden">
-        <label for="products-category-select" class="sr-only">Product category</label>
+        <label for="products-category-select" class="sr-only">
+          {t(locale, 'products.categoryAria')}
+        </label>
         <select
           id="products-category-select"
           data-products-select
@@ -93,7 +84,7 @@ const tabs = PRODUCT_TABS.map((tab) => {
 
       <div
         role="tablist"
-        aria-label="Product categories"
+        aria-label={t(locale, 'products.categoriesAria')}
         class="hidden w-full products-tabs:flex"
       >
         {

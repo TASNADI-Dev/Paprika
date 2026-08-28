@@ -1,7 +1,6 @@
 ---
 import { asset } from '../lib/assets';
-import { withBase } from '../lib/paths';
-import type { Locale } from '../lib/i18n';
+import { localizedPath, t, type Locale } from '../lib/i18n';
 
 interface ContactItem {
   _key?: string;
@@ -17,9 +16,6 @@ interface Props {
 }
 
 const ICON_COLORS = ['text-blue', 'text-red', 'text-green'] as const;
-
-const DEFAULT_SLOGAN =
-  'Because the best retail experiences always need a little spice.';
 
 const DEFAULT_CONTACT_ITEMS: ContactItem[] = [
   {
@@ -71,10 +67,12 @@ const social = [
   },
 ] as const;
 
-const { locale: _locale = 'en', slogan, contactItems } = Astro.props;
+const { locale = 'en', slogan, contactItems } = Astro.props;
 
 const year = new Date().getFullYear();
-const tagline = slogan || DEFAULT_SLOGAN;
+const homeHref = localizedPath(locale, '/');
+const privacyHref = localizedPath(locale, '/privacy-policy');
+const tagline = slogan || t(locale, 'footer.defaultSlogan');
 const items = contactItems?.length ? contactItems : DEFAULT_CONTACT_ITEMS;
 ---
 
@@ -84,10 +82,10 @@ const items = contactItems?.length ? contactItems : DEFAULT_CONTACT_ITEMS;
       class="flex items-start justify-between gap-10 max-lg:flex-col max-lg:gap-8"
     >
       <div class="max-w-md">
-        <a href={withBase()} class="inline-block leading-none" aria-label="Paprika Advertising home">
+        <a href={homeHref} class="inline-block leading-none" aria-label={t(locale, 'nav.homeAria')}>
           <img
             src={asset('/global/logo.webp')}
-            alt="Paprika Advertising"
+            alt={t(locale, 'footer.logoAlt')}
             width="182"
             height="48"
             class="h-auto w-[7.5rem]"
@@ -147,23 +145,21 @@ const items = contactItems?.length ? contactItems : DEFAULT_CONTACT_ITEMS;
       class="flex items-center justify-between gap-6 text-sm max-lg:flex-col max-lg:items-start max-lg:gap-5"
     >
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-mid-dark">
-        <p>
-          All rights reserved. © Copyright {year} Paprika Advertising
-        </p>
+        <p>{t(locale, 'footer.copyright', { year })}</p>
         <a
-          href={withBase('/privacy-policy')}
+          href={privacyHref}
           class="underline underline-offset-2 transition-colors duration-300 hover:text-blue"
         >
-          Privacy Policy
+          {t(locale, 'footer.privacyPolicy')}
         </a>
         <button
           type="button"
           class="cky-banner-element cursor-pointer border-0 bg-transparent p-0 underline underline-offset-2 transition-colors duration-300 hover:text-blue"
         >
-          Cookie settings
+          {t(locale, 'footer.cookieSettings')}
         </button>
         <p>
-          Design by{' '}
+          {t(locale, 'footer.designBy')}{' '}
           <a
             href="https://www.tasnadi.co/"
             target="_blank"
@@ -175,7 +171,7 @@ const items = contactItems?.length ? contactItems : DEFAULT_CONTACT_ITEMS;
         </p>
       </div>
 
-      <ul class="flex items-center gap-4" role="list" aria-label="Social media">
+      <ul class="flex items-center gap-4" role="list" aria-label={t(locale, 'footer.socialAria')}>
         {
           social.map((item) => (
             <li>
