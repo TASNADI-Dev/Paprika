@@ -2,7 +2,7 @@
   "nav": {
     "products": "Produits",
     "aboutUs": "À propos",
-    "requestQuote": "Demander un devis",
+    "requestQuote": "Demande de devis",
     "homeAria": "Accueil Paprika Advertising",
     "logoAlt": "Logo Paprika Advertising",
     "primaryAria": "Navigation principale",
@@ -46,13 +46,13 @@
     "categoryAria": "Catégorie de produit",
     "categoriesAria": "Catégories de produits",
     "tabs": {
-      "floorStand": "Présentoir de sol",
-      "counter": "Comptoir",
-      "shelfOrganizer": "Organiseur de rayon",
-      "busStopFrame": "Bus Stop – Cadre",
+      "floorStand": "Présentoir au sol",
+      "counter": "Présentoir de comptoir",
+      "shelfOrganizer": "Organisateur de rayon",
+      "busStopFrame": "Cadre stop-rayon",
       "crossMerch": "Cross Merch",
-      "testerGlorifier": "Testeur – Glorifier",
-      "eco": "Éco"
+      "testerGlorifier": "Testeur et Glorifier",
+      "eco": "Gamme Éco"
     },
     "bodies": {
       "floorStand": "Un présentoir de sol, ou unité d'exposition autoportante (FSDU), est l'un des outils marketing point de vente les plus efficaces. Placé dans les zones à fort trafic du magasin, il met les produits en valeur hors du rayon standard, maximise la visibilité et stimule les achats impulsifs. Conçu sur mesure en forme et dimensions, il s'aligne parfaitement avec l'identité de marque et les campagnes promotionnelles.",
@@ -118,8 +118,8 @@
     },
     "consent": "J'ai lu et j'accepte la {privacyLink}, et je consens au stockage et au traitement de mes données personnelles.*",
     "privacyLink": "Politique de confidentialité",
-    "submit": "Envoyer",
-    "required": "*Obligatoire",
+    "submit": "Soumettre",
+    "required": "*Champ obligatoire",
     "error": "Oups ! Une erreur s'est produite lors de l'envoi du formulaire.",
     "success": "Merci pour votre message !"
   },
@@ -172,7 +172,7 @@
     }
   },
   "support": {
-    "body": "Ce site web a été réalisé dans le cadre et avec le soutien du programme Demján Sándor.",
+    "body": "A weboldal a Demján Sándor Program keretében és támogatásával valósult meg.",
     "dspAlt": "Programme Demján Sándor — www.dsprogram.hu",
     "neumAlt": "Neumann János Nonprofit Kft.",
     "ariaLabel": "Soutien au programme"
