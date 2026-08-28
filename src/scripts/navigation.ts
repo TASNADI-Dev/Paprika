@@ -9,6 +9,8 @@ const middleBar = toggle?.querySelector<HTMLElement>('[data-nav-bar="middle"]');
 const bottomBar = toggle?.querySelector<HTMLElement>('[data-nav-bar="bottom"]');
 
 if (header && toggle && panel && topBar && middleBar && bottomBar) {
+  const openLabel = toggle.getAttribute('data-open-label') ?? 'Open menu';
+  const closeLabel = toggle.getAttribute('data-close-label') ?? 'Close menu';
   const iconTl = gsap.timeline({ paused: true });
 
   // Bars sit 8px apart in a 17px box (1 + 8 + 1 + 8 + 1); move ends to center for the X.
@@ -22,7 +24,7 @@ if (header && toggle && panel && topBar && middleBar && bottomBar) {
   const setOpen = (open: boolean) => {
     header.dataset.navOpen = open ? 'true' : 'false';
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    toggle.setAttribute('aria-label', open ? closeLabel : openLabel);
     panel.hidden = !open;
     document.body.classList.toggle('overflow-hidden', open);
 

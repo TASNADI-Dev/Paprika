@@ -1,19 +1,31 @@
 ---
 import Button from './Button.astro';
 import { asset } from '../lib/assets';
-import { withBase } from '../lib/paths';
-import type { Locale } from '../lib/i18n';
+import {
+  localizedPath,
+  switchLocalePath,
+  t,
+  type Locale,
+} from '../lib/i18n';
 
 interface Props {
   locale?: Locale;
 }
 
-const { locale: _locale = 'en' } = Astro.props;
+const { locale = 'en' } = Astro.props;
+
+const currentPath = Astro.url.pathname;
 
 const links = [
-  { label: 'Products', href: withBase('/products') },
-  { label: 'About Us', href: withBase('/about-us') },
-];---
+  { label: t(locale, 'nav.products'), href: localizedPath(locale, '/products') },
+  { label: t(locale, 'nav.aboutUs'), href: localizedPath(locale, '/about-us') },
+];
+
+const enHref = switchLocalePath(currentPath, 'en');
+const frHref = switchLocalePath(currentPath, 'fr');
+const quoteHref = `${localizedPath(locale, '/')}#quote`;
+const homeHref = localizedPath(locale, '/');
+---
 
 <header
   data-nav
@@ -23,10 +35,10 @@ const links = [
   <div
     class="mx-auto flex max-w-container items-center justify-between gap-4 px-[6vw] py-2.5 lg:gap-8"
   >
-    <a href={withBase()} class="shrink-0 leading-none" aria-label="Paprika Advertising home">
+    <a href={homeHref} class="shrink-0 leading-none" aria-label={t(locale, 'nav.homeAria')}>
       <img
         src={asset('/global/logo.webp')}
-        alt="Paprika Advertising logo"
+        alt={t(locale, 'nav.logoAlt')}
         width="182"
         height="48"
         class="h-auto w-[7.5rem]"
@@ -36,7 +48,7 @@ const links = [
     </a>
 
     <div class="flex items-center gap-3 lg:gap-6">
-      <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
+      <nav class="hidden items-center gap-1 lg:flex" aria-label={t(locale, 'nav.primaryAria')}>
         {
           links.map((link) => (
             <a
@@ -49,21 +61,43 @@ const links = [
         }
       </nav>
 
-      <Button href={withBase('#quote')} label="Request a Quote" />
-      <div class="hidden items-center gap-2 text-sm lg:flex" aria-label="Language">
-        <a href="#" class="underline" hreflang="en" aria-current="true">EN</a>
-        <a href="#" class="transition-colors duration-300 hover:text-blue" hreflang="fr">FR</a>
+      <Button href={quoteHref} label={t(locale, 'nav.requestQuote')} />
+      <div class="hidden items-center gap-2 text-sm lg:flex" aria-label={t(locale, 'nav.languageAria')}>
+        <a
+          href={enHref}
+          class:list={[
+            'transition-colors duration-300 hover:text-blue',
+            locale === 'en' && 'underline',
+          ]}
+          hreflang="en"
+          {...locale === 'en' ? { 'aria-current': 'true' } : {}}
+        >
+          EN
+        </a>
+        <a
+          href={frHref}
+          class:list={[
+            'transition-colors duration-300 hover:text-blue',
+            locale === 'fr' && 'underline',
+          ]}
+          hreflang="fr"
+          {...locale === 'fr' ? { 'aria-current': 'true' } : {}}
+        >
+          FR
+        </a>
       </div>
 
       <button
         type="button"
         data-nav-toggle
+        data-open-label={t(locale, 'nav.openMenu')}
+        data-close-label={t(locale, 'nav.closeMenu')}
         class="relative flex h-10 w-10 items-center justify-center lg:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
-        aria-label="Open menu"
+        aria-label={t(locale, 'nav.openMenu')}
       >
-        <span class="sr-only">Menu</span>
+        <span class="sr-only">{t(locale, 'nav.menu')}</span>
         <span class="relative block h-[17px] w-6" aria-hidden="true">
           <span
             data-nav-bar="top"
@@ -90,7 +124,7 @@ const links = [
   >
     <nav
       class="mx-auto flex max-w-container flex-col gap-6 px-[6vw] py-10"
-      aria-label="Mobile"
+      aria-label={t(locale, 'nav.mobileAria')}
     >
       {
         links.map((link) => (
@@ -103,9 +137,29 @@ const links = [
         ))
       }
 
-      <div class="flex items-center gap-3 pt-2 text-xl" aria-label="Language">
-        <a href="#" class="underline" hreflang="en" aria-current="true">EN</a>
-        <a href="#" class="transition-colors duration-300 hover:text-blue" hreflang="fr">FR</a>
+      <div class="flex items-center gap-3 pt-2 text-xl" aria-label={t(locale, 'nav.languageAria')}>
+        <a
+          href={enHref}
+          class:list={[
+            'transition-colors duration-300 hover:text-blue',
+            locale === 'en' && 'underline',
+          ]}
+          hreflang="en"
+          {...locale === 'en' ? { 'aria-current': 'true' } : {}}
+        >
+          EN
+        </a>
+        <a
+          href={frHref}
+          class:list={[
+            'transition-colors duration-300 hover:text-blue',
+            locale === 'fr' && 'underline',
+          ]}
+          hreflang="fr"
+          {...locale === 'fr' ? { 'aria-current': 'true' } : {}}
+        >
+          FR
+        </a>
       </div>
     </nav>
   </div>
