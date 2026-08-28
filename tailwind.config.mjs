@@ -20,6 +20,9 @@ export default {
       maxWidth: {
         container: '1440px',
       },
+      screens: {
+        'products-tabs': '1090px',
+      },
     },
   },
 };

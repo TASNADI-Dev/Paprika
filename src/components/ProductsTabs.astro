@@ -60,19 +60,19 @@ const tabs = PRODUCT_TABS.map((tab) => {
         alt=""
         width="88"
         height="4"
-        class="mb-6 h-1 w-[88px]"
+        class="mb-2 h-1 w-[88px]"
         loading="eager"
         decoding="async"
       />
       <h1
-        class="font-heading text-[80px] font-medium tracking-tight text-dark-gray max-md:text-3xl max-lg:text-4xl"
+        class="font-heading text-[60px] font-medium leading-[1.2] tracking-tight text-dark-gray max-md:text-[2.625rem]"
       >
         Products
       </h1>
     </div>
 
-    <div class="mt-10 lg:mt-12">
-      <div class="relative lg:hidden">
+    <div class="mt-10 products-tabs:mt-12">
+      <div class="relative products-tabs:hidden">
         <label for="products-category-select" class="sr-only">Product category</label>
         <select
           id="products-category-select"
@@ -94,7 +94,7 @@ const tabs = PRODUCT_TABS.map((tab) => {
       <div
         role="tablist"
         aria-label="Product categories"
-        class="hidden w-full lg:flex"
+        class="hidden w-full products-tabs:flex"
       >
         {
           tabs.map((tab, index) => (
@@ -106,7 +106,7 @@ const tabs = PRODUCT_TABS.map((tab) => {
               aria-controls={`panel-${tab.id}`}
               aria-selected={index === 0 ? 'true' : 'false'}
               tabindex={index === 0 ? 0 : -1}
-              class="products-tab flex-1 cursor-pointer border-b-2 border-mid-gray-1 pb-2 text-center text-base text-mid-gray-1 transition-colors duration-300 hover:text-blue aria-selected:border-blue aria-selected:text-blue"
+              class="products-tab flex-1 cursor-pointer border-b-2 border-mid-gray-1 pb-2 text-center text-base text-dark-gray/50 transition-colors duration-300 hover:text-blue aria-selected:border-blue aria-selected:text-blue"
             >
               {tab.label}
             </button>
