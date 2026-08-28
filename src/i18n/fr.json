@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "products": "Produits",
+    "aboutUs": "À propos",
+    "requestQuote": "Demander un devis",
+    "homeAria": "Accueil Paprika Advertising",
+    "logoAlt": "Logo Paprika Advertising",
+    "primaryAria": "Navigation principale",
+    "mobileAria": "Navigation mobile",
+    "languageAria": "Langue",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "menu": "Menu"
+  },
+  "footer": {
+    "logoAlt": "Paprika Advertising",
+    "defaultSlogan": "Parce que les meilleures expériences en magasin ont toujours besoin d'un peu de piquant.",
+    "copyright": "Tous droits réservés. © Copyright {year} Paprika Advertising",
+    "privacyPolicy": "Politique de confidentialité",
+    "cookieSettings": "Paramètres des cookies",
+    "designBy": "Design par",
+    "socialAria": "Réseaux sociaux"
+  },
+  "meta": {
+    "home": {
+      "title": "Paprika | Paprika Advertising",
+      "description": "Agence franco-hongroise de publicité PLV basée à Budapest. Présentoirs sur mesure, matériaux durables, et conception et production clé en main."
+    },
+    "about": {
+      "title": "À propos | Paprika Advertising",
+      "description": "Paprika Advertising est une entreprise franco-hongroise basée à Budapest, spécialisée dans les présentoirs Point of Sale sur mesure. Design, production et partenariat pour les marques retail."
+    },
+    "products": {
+      "title": "Produits | Paprika Advertising",
+      "description": "Découvrez les présentoirs PLV Paprika Advertising : présentoirs de sol, comptoirs, organiseurs de rayon, cadres bus stop, cross-merch, testeurs et solutions éco."
+    },
+    "privacy": {
+      "title": "Politique de confidentialité | Paprika Advertising",
+      "description": "Comment Paprika Advertising collecte, utilise et protège les données personnelles.",
+      "fallbackTitle": "Politique de confidentialité",
+      "emptyBody": "Le contenu de la politique de confidentialité n'est pas encore disponible."
+    }
+  },
+  "products": {
+    "title": "Produits",
+    "categoryAria": "Catégorie de produit",
+    "categoriesAria": "Catégories de produits",
+    "tabs": {
+      "floorStand": "Présentoir de sol",
+      "counter": "Comptoir",
+      "shelfOrganizer": "Organiseur de rayon",
+      "busStopFrame": "Bus Stop – Cadre",
+      "crossMerch": "Cross Merch",
+      "testerGlorifier": "Testeur – Glorifier",
+      "eco": "Éco"
+    },
+    "bodies": {
+      "floorStand": "Un présentoir de sol, ou unité d'exposition autoportante (FSDU), est l'un des outils marketing point de vente les plus efficaces. Placé dans les zones à fort trafic du magasin, il met les produits en valeur hors du rayon standard, maximise la visibilité et stimule les achats impulsifs. Conçu sur mesure en forme et dimensions, il s'aligne parfaitement avec l'identité de marque et les campagnes promotionnelles.",
+      "counter": "Un présentoir de comptoir (CDU) est une solution marketing compacte conçue pour les zones de caisse, comptoirs retail et étagères. Idéal pour mettre en avant les petits produits, les nouveautés ou les offres promotionnelles, il capte l'attention directement au point d'achat et stimule significativement les ventes impulsives.",
+      "shelfOrganizer": "Un organiseur de rayon structure les étagères et met en avant les produits phares. Il apporte de la clarté aux gammes, guide l'attention des acheteurs et assure une présentation de marque propre et cohérente en rayon — un outil puissant pour renforcer la présence en linéaire.",
+      "busStopFrame": "Le Bus Stop Frame est une unité d'exposition grand format conçue pour les têtes de gondole et les emplacements à forte visibilité. Il garantit que les promotions et campagnes sont clairement visibles de loin, orientant efficacement le flux des clients vers des catégories spécifiques.",
+      "crossMerch": "Un cross-merchandiser est une solution d'exposition conçue pour présenter des produits complémentaires côte à côte. Il encourage la vente croisée, augmente le panier moyen et facilite l'achat de produits associés — par exemple associer boissons et snacks.",
+      "testerGlorifier": "Les présentoirs testeurs et glorifiers sont conçus pour mettre en lumière les produits premium et enrichir l'expérience en magasin. Les testeurs invitent les clients à essayer et interagir avec le produit, tandis que les glorifiers offrent une présentation exclusive qui souligne le luxe et la qualité. Particulièrement populaires en cosmétique, beauté, spiritueux et FMCG premium.",
+      "eco": "La catégorie Éco regroupe des présentoirs point de vente fabriqués à partir de matériaux écologiques et durables. Conçus avec des composants recyclés ou entièrement recyclables, ces solutions offrent une communication de marque à fort impact sans compromettre la responsabilité environnementale — le choix idéal pour les entreprises engagées dans la durabilité."
+    }
+  },
+  "hero": {
+    "headline": "Paprika Advertising",
+    "body": "Paprika Advertising est une agence franco-hongroise de publicité PLV",
+    "ctaLabel": "Demander un devis",
+    "imageAlt": "Présentoir point de vente Philips Baristina",
+    "ariaLabel": "Bannière principale"
+  },
+  "services": {
+    "headline": "Nos services",
+    "body": "Nous proposons des solutions PLV de bout en bout, du design à la livraison. En combinant design sur mesure, prototypage de précision, fabrication de haute qualité et logistique fiable, nous aidons nos partenaires à faire ressortir leurs produits en environnement retail.",
+    "items": {
+      "multimaterial": {
+        "title": "Production multimatière",
+        "body": "Nous travaillons une large gamme de matériaux, du bois et du métal au carton et aux plastiques. Chaque projet est adapté aux exigences de qualité, de fonctionnalité et d'identité de marque."
+      },
+      "bespoke": {
+        "title": "Design sur mesure",
+        "body": "Nous concevons des solutions PLV sur mesure alliant créativité et fonctionnalité. Notre objectif : créer des présentoirs percutants qui valorisent votre marque en retail."
+      },
+      "eco": {
+        "title": "Expertise éco-design",
+        "body": "Nous utilisons des matériaux durables et des pratiques de fabrication respectueuses de l'environnement. En optimisant l'usage des matériaux et en rationalisant le design, nous réduisons les déchets tout en offrant des solutions rentables."
+      },
+      "technology": {
+        "title": "Technologie",
+        "body": "Nous exploitons des technologies de pointe : découpe laser, usinage CNC et impression 3D. Notre équipement garantit des délais rapides, une grande précision et des standards de fabrication premium."
+      }
+    }
+  },
+  "eco": {
+    "headline": "ÉCO",
+    "body": "Aujourd'hui, la durabilité n'est plus une option — c'est un pilier d'une fabrication responsable. Nous nous engageons à mettre en œuvre des solutions à chaque étape du design et de la production pour réduire notre empreinte environnementale tout en maintenant les plus hauts standards de qualité.\n\nGrâce à un choix réfléchi des matériaux, un design rationalisé et des flux de fabrication efficaces, nous minimisons les chutes et les déchets. Avec une large gamme de matières recyclées disponibles, nous privilégions les intrants éco-responsables. Par exemple, nos processus utilisent du polystyrène choc (HIPS) contenant jusqu'à 80 % de plastique recyclé, soutenant directement l'économie circulaire.\n\nNous croyons que la combinaison d'une réflexion durable et de technologies avancées produit des solutions à la fois écologiques et économiquement viables. Notre objectif : offrir à nos partenaires des solutions PLV qui reflètent leurs valeurs et répondent aux défis de demain.",
+    "imageAlt": "Présentoir PLV durable",
+    "ariaLabel": "Éco"
+  },
+  "quote": {
+    "headline": "Demander un devis",
+    "body": "N'hésitez pas à nous contacter à tout moment, nous vous répondrons rapidement.",
+    "contactTitle": "Coordonnées",
+    "companyName": "Paprika Advertising Kft.",
+    "ariaLabel": "Demander un devis",
+    "formSubject": "Demande de devis Paprika",
+    "fields": {
+      "name": "Nom*",
+      "namePlaceholder": "ex. Jean Dupont",
+      "email": "E-mail*",
+      "emailPlaceholder": "ex. jdupont@email.com",
+      "subject": "Objet*",
+      "subjectPlaceholder": "ex. Demande de devis",
+      "message": "Message",
+      "messagePlaceholder": "Laissez-nous un message..."
+    },
+    "consent": "J'ai lu et j'accepte la {privacyLink}, et je consens au stockage et au traitement de mes données personnelles.*",
+    "privacyLink": "Politique de confidentialité",
+    "submit": "Envoyer",
+    "required": "*Obligatoire",
+    "error": "Oups ! Une erreur s'est produite lors de l'envoi du formulaire.",
+    "success": "Merci pour votre message !"
+  },
+  "aboutHero": {
+    "headline": "À propos",
+    "body": "Une agence créative qui guide et inspire",
+    "imageAlt": "L'équipe Paprika Advertising au travail",
+    "ariaLabel": "Bannière à propos"
+  },
+  "aboutIntro": {
+    "body": "Paprika Advertising est une entreprise franco-hongroise basée à Budapest, spécialisée dans la conception et la production de présentoirs Point of Sale (POS) sur mesure. Depuis plus de 25 ans, nous créons des solutions en magasin qui renforcent la visibilité des marques et des produits.\n\nNotre équipe interne gère chaque projet de bout en bout, du design initial à la production finale. La fabrication a lieu dans notre atelier spécialisé et via un réseau international de partenaires établis. Nous travaillons le carton, le plastique, le métal, le bois et les textiles, en adaptant chaque présentoir aux spécifications exactes du projet.\n\nNotre priorité : fiabilité, exécution irréprochable et relations clients durables. La grande majorité de notre production est livrée en Europe occidentale, avec un focus principal sur le marché français.",
+    "ctaLabel": "Demander un devis",
+    "ariaLabel": "Introduction à propos",
+    "highlights": {
+      "experience": {
+        "title": "Plus de 35 ans d'expérience",
+        "body": "Conception et fabrication de solutions PLV sur mesure pour des partenaires internationaux."
+      },
+      "execution": {
+        "title": "Exécution de bout en bout",
+        "body": "Design, prototypage, production et logistique — tout sous un même toit."
+      },
+      "export": {
+        "title": "98 % d'export",
+        "body": "La grande majorité de notre production est exportée vers l'Europe occidentale, principalement la France et l'Allemagne."
+      }
+    }
+  },
+  "aboutValues": {
+    "headline": "La valeur que nous apportons à nos partenaires",
+    "body": "Nous menons chaque projet avec un seul objectif : fournir des solutions PLV fiables, de haute qualité et efficaces à nos partenaires.",
+    "ariaLabel": "La valeur que nous apportons",
+    "items": {
+      "quality": {
+        "title": "Qualité",
+        "body": "Exécution précise, résultats fiables."
+      },
+      "flexibility": {
+        "title": "Flexibilité",
+        "body": "Des solutions adaptées à vos besoins spécifiques."
+      },
+      "precision": {
+        "title": "Précision et respect des délais",
+        "body": "Respect strict des échéances et spécifications convenues."
+      },
+      "partnership": {
+        "title": "Partenariat",
+        "body": "Des collaborations durables fondées sur la confiance."
+      }
+    }
+  },
+  "support": {
+    "body": "Ce site web a été réalisé dans le cadre et avec le soutien du programme Demján Sándor.",
+    "dspAlt": "Programme Demján Sándor — www.dsprogram.hu",
+    "neumAlt": "Neumann János Nonprofit Kft.",
+    "ariaLabel": "Soutien au programme"
+  }
+}

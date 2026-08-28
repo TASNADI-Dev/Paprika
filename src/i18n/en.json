@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "products": "Products",
+    "aboutUs": "About Us",
+    "requestQuote": "Request a Quote",
+    "homeAria": "Paprika Advertising home",
+    "logoAlt": "Paprika Advertising logo",
+    "primaryAria": "Primary",
+    "mobileAria": "Mobile",
+    "languageAria": "Language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menu": "Menu"
+  },
+  "footer": {
+    "logoAlt": "Paprika Advertising",
+    "defaultSlogan": "Because the best retail experiences always need a little spice.",
+    "copyright": "All rights reserved. © Copyright {year} Paprika Advertising",
+    "privacyPolicy": "Privacy Policy",
+    "cookieSettings": "Cookie settings",
+    "designBy": "Design by",
+    "socialAria": "Social media"
+  },
+  "meta": {
+    "home": {
+      "title": "Paprika | Paprika Advertising",
+      "description": "French-Hungarian POS advertising agency based in Budapest. Custom point-of-sale displays, sustainable materials, and full-service design and production."
+    },
+    "about": {
+      "title": "About Us | Paprika Advertising",
+      "description": "Paprika Advertising is a Budapest-based Franco-Hungarian company specializing in custom Point of Sale displays. Design, production, and partnership for retail brands."
+    },
+    "products": {
+      "title": "Products | Paprika Advertising",
+      "description": "Explore Paprika Advertising POS displays: floor stands, counters, shelf organizers, bus stop frames, cross-merch, testers, and eco solutions."
+    },
+    "privacy": {
+      "title": "Privacy Policy | Paprika Advertising",
+      "description": "How Paprika Advertising collects, uses, and protects personal data.",
+      "fallbackTitle": "Privacy Policy",
+      "emptyBody": "Privacy policy content is not available yet."
+    }
+  },
+  "products": {
+    "title": "Products",
+    "categoryAria": "Product category",
+    "categoriesAria": "Product categories",
+    "tabs": {
+      "floorStand": "Floor Stand",
+      "counter": "Counter",
+      "shelfOrganizer": "Shelf Organizer",
+      "busStopFrame": "Bus Stop – Frame",
+      "crossMerch": "Cross Merch",
+      "testerGlorifier": "Tester – Glorifier",
+      "eco": "Eco"
+    },
+    "bodies": {
+      "floorStand": "A floor stand, or freestanding display unit (FSDU), is one of the most effective point-of-sale marketing tools. Positioned in high-traffic areas of the store, it elevates products off the standard shelf, maximizes visibility, and drives impulse purchases. Custom-designed in shape and dimensions, it aligns seamlessly with brand identity and promotional campaigns.",
+      "counter": "A counter display (CDU) is a compact marketing solution designed for checkout areas, retail counters, and store shelves. Ideal for showcasing smaller products, new arrivals, or promotional offers, it captures attention directly at the point of purchase, significantly boosting impulse sales.",
+      "shelfOrganizer": "A shelf organizer structures store shelves and highlights featured products. It brings clarity to product ranges, guides shopper focus, and ensures a clean, consistent brand presentation on-shelf—making it a powerful tool for brand building and strengthening shelf presence.",
+      "busStopFrame": "The Bus Stop Frame is a large-format framed display unit designed for endcaps and high-visibility retail locations. It ensures promotions and campaigns are clearly visible from a distance, effectively steering shopper footfall toward specific product categories.",
+      "crossMerch": "A cross-merchandiser is a display solution engineered to showcase complementary products side by side. It encourages cross-selling, increases basket size, and makes it effortless for shoppers to pick up related items—such as pairing soft drinks with snacks.",
+      "testerGlorifier": "Tester and glorifier displays are designed to spotlight premium products and elevate the overall in-store experience. Testers invite shoppers to try and interact with the product, while glorifiers deliver an exclusive presentation that underscores luxury and quality. They are especially popular in cosmetics, beauty, spirits, and premium FMCG sectors.",
+      "eco": "The Eco category features point-of-sale displays crafted from eco-friendly, sustainable materials. Built using recycled or fully recyclable components, these solutions deliver high-impact brand communication without compromising environmental responsibility—making them the ideal choice for companies prioritizing sustainability."
+    }
+  },
+  "hero": {
+    "headline": "Paprika Advertising",
+    "body": "Paprika Advertising is a French-Hungarian POS Advertising agency",
+    "ctaLabel": "Request a Quote",
+    "imageAlt": "Philips Baristina point-of-sale display",
+    "ariaLabel": "Hero"
+  },
+  "services": {
+    "headline": "Our Services",
+    "body": "We offer end-to-end POS solutions from design through to delivery. By combining custom design, precision prototyping, high-quality manufacturing, and reliable logistics, we empower our partners to ensure their products stand out in the retail environment.",
+    "items": {
+      "multimaterial": {
+        "title": "Multimaterial Production",
+        "body": "We process a diverse array of materials, from wood and metal to cardboard and plastics. Every project is tailored to meet specific quality standards, functional requirements, and unique brand needs."
+      },
+      "bespoke": {
+        "title": "Bespoke Design",
+        "body": "We engineer tailor-made POS solutions that seamlessly combine creativity and functionality. Our goal is to create high-impact, engaging displays that elevate your brand within the retail landscape."
+      },
+      "eco": {
+        "title": "Eco-Design Expertise",
+        "body": "We utilize sustainable materials and eco-friendly manufacturing practices to minimize environmental impact. By optimizing material usage and streamlining product design, we eliminate waste while delivering cost-effective solutions for our partners."
+      },
+      "technology": {
+        "title": "Technology",
+        "body": "We leverage cutting-edge technologies, including laser cutting, CNC machining, and 3D printing. Our state-of-the-art equipment ensures rapid turnaround, high precision, and premium manufacturing standards."
+      }
+    }
+  },
+  "eco": {
+    "headline": "ECO",
+    "body": "Today, sustainability is no longer merely an option—it is a cornerstone of responsible manufacturing. We are committed to implementing solutions across every stage of the design and production process that reduce our environmental footprint while continuing to meet the highest quality standards.\n\nThrough thoughtful material selection, streamlined design, and efficient manufacturing workflows, we actively minimize material scrap and waste generation. With a wide range of recycled raw materials now available, we give strong preference to eco-conscious inputs. For example, our manufacturing processes utilize High Impact Polystyrene (HIPS) containing up to 80% recycled plastic, directly supporting the circular economy and driving sustainable manufacturing.\n\nWe believe that combining sustainable thinking with advanced manufacturing technology yields solutions that are both eco-friendly and economically viable. Our goal is to provide our partners with POS solutions that not only reflect their brand values, but also directly address the challenges of tomorrow.",
+    "imageAlt": "Sustainable POS display",
+    "ariaLabel": "Eco"
+  },
+  "quote": {
+    "headline": "Request a Quote",
+    "body": "Please feel free to get in touch anytime, we will reply shortly.",
+    "contactTitle": "Contact Info",
+    "companyName": "Paprika Advertising Kft.",
+    "ariaLabel": "Request a Quote",
+    "formSubject": "Paprika quote request",
+    "fields": {
+      "name": "Name*",
+      "namePlaceholder": "e.g. John Doe",
+      "email": "Email*",
+      "emailPlaceholder": "e.g. jdoe@email.com",
+      "subject": "Subject*",
+      "subjectPlaceholder": "e.g. Getting a quote",
+      "message": "Message",
+      "messagePlaceholder": "Leave us a message..."
+    },
+    "consent": "I have read and agree to the {privacyLink}, and I consent to the storage and processing of my personal data.*",
+    "privacyLink": "Privacy Policy",
+    "submit": "Submit",
+    "required": "*Required",
+    "error": "Oops! Something went wrong while submitting the form.",
+    "success": "Thank you for your submission!"
+  },
+  "aboutHero": {
+    "headline": "About Us",
+    "body": "A creative agency that lead and inspire",
+    "imageAlt": "Paprika Advertising team at work",
+    "ariaLabel": "About hero"
+  },
+  "aboutIntro": {
+    "body": "Paprika Advertising is a Budapest-based Franco-Hungarian company specializing in the design and production of custom Point of Sale (POS) displays. For over 25 years, we have been crafting in-store solutions that elevate brand and product visibility across retail environments.\n\nOur in-house team manages every project end-to-end, from initial design through to final production. Manufacturing takes place in our own specialized workshop and through an established international partner network. We work with cardboard, plastic, metal, wood, and textiles, tailoring every display to the exact specifications of the project.\n\nOur focus is rooted in reliability, flawless execution, and building lasting client relationships. The vast majority of our production is delivered to Western Europe, with a primary focus on the French market.",
+    "ctaLabel": "Request a Quote",
+    "ariaLabel": "About intro",
+    "highlights": {
+      "experience": {
+        "title": "35+ Years of Experience",
+        "body": "Design and manufacturing of bespoke POS solutions for international partners."
+      },
+      "execution": {
+        "title": "End-to-End Execution",
+        "body": "Design, prototyping, production, and logistics—all handled under one roof."
+      },
+      "export": {
+        "title": "98% Export Rate",
+        "body": "The vast majority of our production is exported to Western Europe, primarily France and Germany."
+      }
+    }
+  },
+  "aboutValues": {
+    "headline": "The Value We Deliver to Our Partners",
+    "body": "We execute every project with a single goal: delivering reliable, high-quality, and effective POS solutions for our partners.",
+    "ariaLabel": "The value we deliver",
+    "items": {
+      "quality": {
+        "title": "Quality",
+        "body": "Precision execution, dependable results."
+      },
+      "flexibility": {
+        "title": "Flexibility",
+        "body": "Tailoring our solutions to your specific needs."
+      },
+      "precision": {
+        "title": "Precision & Timeliness",
+        "body": "Strictly adhering to agreed deadlines and specifications."
+      },
+      "partnership": {
+        "title": "Partnership",
+        "body": "Building long-term, trust-based collaborations."
+      }
+    }
+  },
+  "support": {
+    "body": "A weboldal a Demján Sándor Program keretében és támogatásával valósult meg.",
+    "dspAlt": "Demján Sándor Program — www.dsprogram.hu",
+    "neumAlt": "Neumann János Nonprofit Kft.",
+    "ariaLabel": "Program support"
+  }
+}

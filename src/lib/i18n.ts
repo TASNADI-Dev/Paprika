@@ -1,11 +1,65 @@
-/** Locale constants and path helpers for EN/FR routing. */
+/** Locale constants, path helpers, and UI translations for EN/FR routing. */
 import { withBase } from './paths';
+import en from '../i18n/en.json';
+import fr from '../i18n/fr.json';
 
 export const DEFAULT_LOCALE = 'en' as const;
 export const LOCALES = ['en', 'fr'] as const;
 export type Locale = (typeof LOCALES)[number];
 
+const dictionaries = { en, fr } as const;
+
+type Dictionary = typeof en;
+
+type NestedKeyOf<ObjectType extends object> = {
+  [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
+    ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
+    : `${Key}`;
+}[keyof ObjectType & (string | number)];
+
+export type TranslationKey = NestedKeyOf<Dictionary>;
+
+export type TranslationParams = Record<string, string | number>;
+
 const FR_PREFIX = '/fr';
+
+function getNestedValue(source: object, key: string): unknown {
+  return key.split('.').reduce<unknown>((value, segment) => {
+    if (value && typeof value === 'object' && segment in value) {
+      return (value as Record<string, unknown>)[segment];
+    }
+
+    return undefined;
+  }, source);
+}
+
+function formatTranslation(template: string, params?: TranslationParams): string {
+  if (!params) {
+    return template;
+  }
+
+  return Object.entries(params).reduce(
+    (result, [param, value]) => result.replaceAll(`{${param}}`, String(value)),
+    template,
+  );
+}
+
+/** Returns a UI string for the given locale and dot-notation key. */
+export function t(
+  locale: Locale,
+  key: TranslationKey,
+  params?: TranslationParams,
+): string {
+  const localized = getNestedValue(dictionaries[locale], key);
+  const fallback = getNestedValue(dictionaries[DEFAULT_LOCALE], key);
+  const value = typeof localized === 'string' ? localized : fallback;
+
+  if (typeof value !== 'string') {
+    return key;
+  }
+
+  return formatTranslation(value, params);
+}
 
 function stripBase(pathname: string): string {
   const rawBase = import.meta.env.BASE_URL || '/';
