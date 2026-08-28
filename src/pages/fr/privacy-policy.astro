@@ -1,0 +1,15 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PrivacyPageContent from '../../components/pages/PrivacyPageContent.astro';
+import { t, type Locale } from '../../lib/i18n';
+
+const locale: Locale = 'fr';
+---
+
+<Layout
+  locale={locale}
+  title={t(locale, 'meta.privacy.title')}
+  description={t(locale, 'meta.privacy.description')}
+>
+  <PrivacyPageContent locale={locale} />
+</Layout>

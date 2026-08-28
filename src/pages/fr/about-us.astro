@@ -1,0 +1,15 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AboutPageContent from '../../components/pages/AboutPageContent.astro';
+import { t, type Locale } from '../../lib/i18n';
+
+const locale: Locale = 'fr';
+---
+
+<Layout
+  locale={locale}
+  title={t(locale, 'meta.about.title')}
+  description={t(locale, 'meta.about.description')}
+>
+  <AboutPageContent locale={locale} />
+</Layout>
