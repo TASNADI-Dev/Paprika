@@ -1,61 +1,99 @@
 /**
- * Studio desk structure: site-wide singletons (Home, About, Products, Privacy, Footer).
+ * Studio desk structure: site-wide singletons with English and French documents.
  */
-import type { StructureResolver } from 'sanity/structure';
+import type { StructureBuilder, StructureResolver } from 'sanity/structure';
 
-const HOME_ID = 'home';
-const ABOUT_ID = 'about';
-const PRODUCTS_ID = 'products';
-const PRIVACY_ID = 'privacy';
-const FOOTER_ID = 'footer';
+export const HOME_EN_ID = 'home';
+export const HOME_FR_ID = 'home-fr';
+export const ABOUT_EN_ID = 'about';
+export const ABOUT_FR_ID = 'about-fr';
+export const PRODUCTS_EN_ID = 'products';
+export const PRODUCTS_FR_ID = 'products-fr';
+export const PRIVACY_EN_ID = 'privacy';
+export const PRIVACY_FR_ID = 'privacy-fr';
+export const FOOTER_EN_ID = 'footer';
+export const FOOTER_FR_ID = 'footer-fr';
+
+type LocalizedSingletonConfig = {
+  schemaType: string;
+  title: string;
+  listId: string;
+  enId: string;
+  frId: string;
+};
+
+function createLocalizedSingleton(
+  S: StructureBuilder,
+  { schemaType, title, listId, enId, frId }: LocalizedSingletonConfig,
+) {
+  return S.listItem()
+    .title(title)
+    .id(listId)
+    .child(
+      S.list()
+        .title(title)
+        .items([
+          S.listItem()
+            .title('English')
+            .id(`${listId}-en`)
+            .child(
+              S.document()
+                .schemaType(schemaType)
+                .documentId(enId)
+                .title(`${title} (English)`)
+                .initialValue({ language: 'en' }),
+            ),
+          S.listItem()
+            .title('Français')
+            .id(`${listId}-fr`)
+            .child(
+              S.document()
+                .schemaType(schemaType)
+                .documentId(frId)
+                .title(`${title} (Français)`)
+                .initialValue({ language: 'fr' }),
+            ),
+        ]),
+    );
+}
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
     .items([
-      S.listItem()
-        .title('Home')
-        .id(HOME_ID)
-        .child(
-          S.document()
-            .schemaType('homePage')
-            .documentId(HOME_ID)
-            .title('Home'),
-        ),
-      S.listItem()
-        .title('About')
-        .id(ABOUT_ID)
-        .child(
-          S.document()
-            .schemaType('aboutPage')
-            .documentId(ABOUT_ID)
-            .title('About'),
-        ),
-      S.listItem()
-        .title('Products')
-        .id(PRODUCTS_ID)
-        .child(
-          S.document()
-            .schemaType('productsPage')
-            .documentId(PRODUCTS_ID)
-            .title('Products'),
-        ),
-      S.listItem()
-        .title('Privacy Policy')
-        .id(PRIVACY_ID)
-        .child(
-          S.document()
-            .schemaType('privacyPage')
-            .documentId(PRIVACY_ID)
-            .title('Privacy Policy'),
-        ),
-      S.listItem()
-        .title('Footer')
-        .id(FOOTER_ID)
-        .child(
-          S.document()
-            .schemaType('footer')
-            .documentId(FOOTER_ID)
-            .title('Footer'),
-        ),
+      createLocalizedSingleton(S, {
+        schemaType: 'homePage',
+        title: 'Home',
+        listId: 'home',
+        enId: HOME_EN_ID,
+        frId: HOME_FR_ID,
+      }),
+      createLocalizedSingleton(S, {
+        schemaType: 'aboutPage',
+        title: 'About',
+        listId: 'about',
+        enId: ABOUT_EN_ID,
+        frId: ABOUT_FR_ID,
+      }),
+      createLocalizedSingleton(S, {
+        schemaType: 'productsPage',
+        title: 'Products',
+        listId: 'products',
+        enId: PRODUCTS_EN_ID,
+        frId: PRODUCTS_FR_ID,
+      }),
+      createLocalizedSingleton(S, {
+        schemaType: 'privacyPage',
+        title: 'Privacy Policy',
+        listId: 'privacy',
+        enId: PRIVACY_EN_ID,
+        frId: PRIVACY_FR_ID,
+      }),
+      createLocalizedSingleton(S, {
+        schemaType: 'footer',
+        title: 'Footer',
+        listId: 'footer',
+        enId: FOOTER_EN_ID,
+        frId: FOOTER_FR_ID,
+      }),
     ]);
