@@ -40,6 +40,7 @@ const footer = await sanityClient.fetch(FOOTER_QUERY);
     <Footer slogan={footer?.slogan} contactItems={footer?.contactItems} />
     <script>
       import '../scripts/smoothScroll.ts';
+      import '../scripts/staggerChildren.ts';
     </script>
   </body>
 </html>
