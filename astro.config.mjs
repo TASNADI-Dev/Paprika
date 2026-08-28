@@ -17,6 +17,13 @@ const dataset = env.PUBLIC_SANITY_DATASET || 'production';
 export default defineConfig({
   site: 'https://tasnadi-dev.github.io',
   base: '/Paprika',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
     // Pre-bundle Studio deps so Vite doesn't re-optimize mid-session
