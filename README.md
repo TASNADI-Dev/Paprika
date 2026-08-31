@@ -9,6 +9,7 @@ Website for [Paprika Advertising](https://www.paprika-advertising.com/). English
 - **React** (Sanity Studio)
 - **Sanity** (CMS)
 - **GSAP** (motion)
+- **FormSubmit** (quote form)
 - **Cloudflare R2** (assets)
 - **Cloudflare Pages** (hosting)
 - **Node.js** 22+
