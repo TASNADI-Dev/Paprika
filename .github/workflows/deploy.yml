@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  repository_dispatch:
+    types: [sanity_publish]
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
 
 permissions:
   contents: read
