@@ -11,7 +11,7 @@ interface Props {
 const { locale } = Astro.props;
 const page = await fetchPrivacyPage(locale);
 
-const title = page?.title || t(locale, 'meta.privacy.fallbackTitle');
+const title = t(locale, 'meta.privacy.heading');
 const body = page?.body ?? null;
 ---
 

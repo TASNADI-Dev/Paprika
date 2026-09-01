@@ -1,6 +1,6 @@
 /**
- * Privacy Policy page singleton: editable title and rich-text body.
- * SEO meta stays code-owned.
+ * Privacy Policy page singleton: editable rich-text body.
+ * Page title and SEO meta stay code-owned.
  */
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { getLocaleSubtitle, languageField } from '../objects/languageField';
@@ -11,12 +11,6 @@ export const privacyPage = defineType({
   type: 'document',
   fields: [
     languageField,
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
     defineField({
       name: 'body',
       title: 'Body',

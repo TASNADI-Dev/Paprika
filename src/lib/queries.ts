@@ -149,7 +149,6 @@ export const PRODUCTS_PAGE_QUERY = defineQuery(`
 
 export const PRIVACY_PAGE_QUERY = defineQuery(`
   *[_type == "privacyPage" && _id == $docId][0]{
-    title,
     body[]{
       ...,
       markDefs[]{

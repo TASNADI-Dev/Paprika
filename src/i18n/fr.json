@@ -37,7 +37,7 @@
     "privacy": {
       "title": "Politique de confidentialité | Paprika Advertising",
       "description": "Comment Paprika Advertising collecte, utilise et protège les données personnelles.",
-      "fallbackTitle": "Politique de confidentialité",
+      "heading": "Politique de confidentialité",
       "emptyBody": "Le contenu de la politique de confidentialité n'est pas encore disponible."
     }
   },
