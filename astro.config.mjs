@@ -15,8 +15,7 @@ const dataset = env.PUBLIC_SANITY_DATASET || 'production';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://tasnadi-dev.github.io',
-  base: '/Paprika',
+  site: 'https://www.paprika-advertising.com',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'fr'],
