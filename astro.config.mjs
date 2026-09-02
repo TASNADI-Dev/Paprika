@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import { loadEnv } from 'vite';
 
 const env = {
@@ -55,5 +56,8 @@ export default defineConfig({
       studioRouterHistory: 'hash',
     }),
     react(),
+    sitemap({
+      filter: (page) => !page.includes('/admin'),
+    }),
   ],
 });
