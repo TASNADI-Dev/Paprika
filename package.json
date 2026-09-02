@@ -9,7 +9,6 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "setup:deploy-webhook": "node scripts/setup-sanity-deploy-webhook.mjs",
     "astro": "astro"
   },
   "dependencies": {
