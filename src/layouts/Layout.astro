@@ -60,6 +60,17 @@ const defaultHref = getAlternateHref(site, Astro.url.pathname, DEFAULT_LOCALE);
       src="https://cdn-cookieyes.com/client_data/1475d71b69c747d303b9d6a064fb5f1e/script.js"
     ></script>
     <!-- End cookieyes banner -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXWCF5JGBX"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-BXWCF5JGBX');
+    </script>
+    <!-- End Google tag (gtag.js) -->
   </head>
   <body class="bg-light-gray font-sans text-dark-gray antialiased">
     <Navigation locale={locale} />
