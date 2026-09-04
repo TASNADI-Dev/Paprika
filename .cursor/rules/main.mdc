@@ -31,7 +31,7 @@ alwaysApply: true
 
 ## Assets
 
-* All image assets are hosted at https://pub-bca52d58a1144baf81ba6ed02c98b0f5.r2.dev. Import `asset()` from `src/lib/assets.ts` to build image URLs. Do not hardcode the CDN base in components.
+* All image assets are hosted at https://assets.paprika-advertising.com. Import `asset()` from `src/lib/assets.ts` to build image URLs. Do not hardcode the CDN base in components.
 
 ## Responsive & Mobile-First Design
 
