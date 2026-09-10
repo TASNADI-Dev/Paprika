@@ -21,6 +21,12 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  releases: {
+    enabled: false,
+  },
+  scheduledDrafts: {
+    enabled: false,
+  },
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
